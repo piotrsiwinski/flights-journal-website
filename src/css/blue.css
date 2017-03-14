@@ -1,0 +1,177 @@
+/*------------------------------------
+    Red color style sheet
+	
+	just replace "51A9F1" with your custom color
+------------------------------------*/
+a:hover {
+	color: #51A9F1;
+}
+.title-border {
+	background-color: #51A9F1;
+	border: 1px solid #51A9F1; 
+}
+#scrollUp {
+	background: #51A9F1;
+}
+.top-wraper-left ul li i {
+	color: #51A9F1;
+}
+.affix .mainmenu-area ul.nav.navbar-nav li a:hover, .affix .mainmenu-area ul.nav.navbar-nav li.active a {
+	color: #51A9F1;
+}
+.mainmenu-area ul.nav.navbar-nav li ul li a:hover {
+	color: #51A9F1;
+}
+.mainmenu-area ul.nav.navbar-nav li ul li:after {
+	background: #51A9F1;
+}
+.fade-carousel .carousel-indicators > li.active {
+	background: #51A9F1;
+}
+.fade-carousel .carousel-control span:hover {
+	border: 1px solid #51A9F1;
+	background: #51A9F1;
+}
+.banner-wrapper .btn-hero { 
+	background: #51A9F1;
+}
+.feature-wrapper .icon:hover i.fa { 
+	color: #51A9F1;
+}
+.callouts-wrapper h2 span {
+	color: #51A9F1;
+}
+.callouts-wrapper .callouts h3::after {
+	background-color: #51A9F1;
+}
+.satisfied-wrapper::before {
+	background: #51A9F1;
+}
+.testimonials-wrapper { 
+	background: #51A9F1;
+}
+.testimonials-wrapper h3 {
+	color: #51A9F1;
+}
+.testimonials-wrapper .carousel-indicators .active {
+	background: #51A9F1;
+}
+.pricing-wrapper-main .title h2::after {
+	background-color: #51A9F1;
+}
+.pricing-wrapper-main h2 span {
+	color: #51A9F1;
+	font-weight: 600;
+}
+.pricing-wrapper-main .pricing-table.featured {
+	border: 3px solid #51A9F1;
+}
+.pricing-wrapper-main .pricing-table.featured .pricing-table-cta a:hover {
+	background: #fff;
+	color: #51A9F1;
+}
+.inner-page-banner .breadcrumb > a:hover {
+	color: #51A9F1;
+}
+.table-custom.table-green tr th {
+	background: #51A9F1;
+	color: #fff;
+}
+div.classic-vertical-tab-panel .nav > li.active, div.classic-vertical-tab-panel .nav > li > a:hover {
+	border-right: 1px solid #51A9F1;
+}
+.form-wrapper .txt2[type="submit"] {
+	background: #51A9F1;
+}
+.btn-shapes .btn-primary {
+	background: #51A9F1;
+}
+.oops .btn-home {
+	background:#51A9F1;
+	border: 1px solid #51A9F1;	
+}
+.blog-text h3 a:hover {
+	color: #51A9F1;
+}
+.blogdetails-wrapper .single-post h2 {
+	color: #51A9F1;
+}
+.blogdetails-wrapper .single-post .sidebar h2::after {
+	background-color: #51A9F1;
+}
+.blogdetails-wrapper .single-post h3 {
+	color: #51A9F1;
+}	
+.blogdetails-wrapper .sidebar .tags li:hover {
+	background: #51A9F1;
+}
+.blogdetails-wrapper .btn:before { 
+	background: #51A9F1;
+}
+.blog-details-comment-info h6 { 
+	color: #51A9F1;
+}
+.blog-details-comments-div .blog-details-comment-info p a {
+	color: #51A9F1;
+}
+.blog-details-share .social-icons li:hover a {
+	color: #51A9F1;
+}
+.footer-wrapper h3:after {
+	background: #51A9F1;
+}
+.footer-wrapper .text-box-right h4 a:hover, .footer-wrapper .text-box-right h4 a:focus {
+	color: #51A9F1;
+}
+.footer-wrapper .footer-tags li a:hover, .footer-wrapper  .footer-tags li a.active {
+	border: 1px solid #51A9F1;
+	color: #51A9F1;
+}
+.team-member-position p {
+	color: #51A9F1;
+}
+.team .team-members .team-member .team-member-info .social a:hover i {
+	background: #51A9F1;
+}
+.social-wrapper h2 span {
+	color: #51A9F1;
+}
+.team-wrapper h2 span {
+	color: #51A9F1;
+}
+.contact-wrapper .btn {
+	background:#51A9F1;
+	}
+.inner-wrapper-main h2 span {
+	color:#51A9F1;
+	}
+.inner-wrapper-main h2:before {
+	background:#51A9F1;
+}	
+.inner-page-banner .breadcrumb .current {
+	color:#51A9F1;
+}
+.blo-image-date > a {
+	background: #51A9F1;
+	}
+.blo-image-date > a:hover {
+	color:#fff;
+}	
+.blog-text > a { 
+background: #51A9F1;
+}
+.contact-wrapper .contact-box i {
+  background:#51A9F1;
+  }
+.contact-wrapper h3:before {
+  background: #51A9F1;
+} 
+.contact-details .divider {
+	background:#51A9F1;
+}
+.classic-tab-panel .tabbable-line > .nav-tabs > li.active {
+	border-bottom: 1px solid #51A9F1;
+}
+.conetent-wrapper h2 span {
+	color: #51A9F1;
+}
