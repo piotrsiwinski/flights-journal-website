@@ -3,11 +3,13 @@
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-      <a class="navbar-brand" href="index.html"><img src="images/logo-yellow.png" class="logo-change" alt="Royal"/></a> </div>
+      <a class="navbar-brand" routerLink="/"><img src="images/logo-yellow.png" class="logo-change" alt="Royal"/></a> </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="mobile-menu nav navbar-nav">
-        <li class="active"><a href="index.html"><span class="fa fa-home"></span></a></li>
+        <li class="active"><a routerLink="/"><span class="fa fa-home"></span></a></li>
+        <li><a routerLink="/user"><span class="fa fa-home"></span></a></li>
+        <li><a routerLink="/login">Login</a></li>
         <li><a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Eliments <i class="fa hover-inn fa-caret-down"></i></a>
           <ul class="sub-menu">
             <li><a href="grid.html">Grid</a></li>
