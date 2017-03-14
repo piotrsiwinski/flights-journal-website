@@ -12,6 +12,9 @@ import { FeatureComponent } from './header/feature/feature.component';
 import { BodyComponent } from './body/body.component';
 import { FooterComponent } from './footer/footer.component';
 import { CompanyComponent } from './company/company.component';
+import {RouterModule} from "@angular/router";
+import {appRoutes} from "./app.routing";
+import { UserComponent } from './user/user.component';
 
 @NgModule({
   declarations: [
@@ -23,12 +26,15 @@ import { CompanyComponent } from './company/company.component';
     FeatureComponent,
     BodyComponent,
     FooterComponent,
-    CompanyComponent
+    CompanyComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    RouterModule.forRoot(appRoutes)
+
   ],
   providers: [],
   bootstrap: [AppComponent]
