@@ -19,6 +19,7 @@ import {HomeComponent} from "./home/home.component";
 import {CompanyComponent} from "./home/company-tst/company.component";
 import { LoginComponent } from './user/login/login.component';
 import {UserService} from "./user/user.service";
+import { RegisterComponent } from './user/register/register.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {UserService} from "./user/user.service";
     FooterComponent,
     CompanyComponent,
     UserComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
