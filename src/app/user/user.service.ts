@@ -20,15 +20,14 @@ export class UserService {
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', token);
 
-    console.log(`headers: ${JSON.stringify(headers, null, 2)}`);
     return this.http
       .get(this.URL + 'auth', { withCredentials: true, headers: headers})
       .map((response: Response) => {
         if(response.status == 200){
-          console.log(response);
+          console.log(`Authenticated: ${JSON.stringify(response, null, 2)}`);
           this.AuthToken = token;
-          console.log(` I am authemticated. This is my token ${this.AuthToken}`);
         }
+        return response.json();
       })
       .catch(this.handleError);
   }
