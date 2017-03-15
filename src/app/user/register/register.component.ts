@@ -8,7 +8,7 @@ import {UserService} from "../user.service";
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  user: User = new User('','','');
+  user: User = new User('','','', '');
   constructor(private userService: UserService) {
 
   }
@@ -17,7 +17,8 @@ export class RegisterComponent implements OnInit {
   }
 
   onLoginFormSubmit(){
-    this.userService.register(this.user).subscribe( data => console.log(data));
+    console.log(JSON.stringify(this.user, null, 2));
+    this.userService.register(this.user).subscribe( data => {console.log(`Register component: ${data}`)});
   }
 
 }

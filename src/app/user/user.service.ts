@@ -6,7 +6,7 @@ import {Observable} from "rxjs";
 
 @Injectable()
 export class UserService {
-  private URL = "http://localhost:11686/api/";
+  private URL = "http://192.168.1.20:8080/";
 
   constructor(private http: Http) {
 
@@ -33,15 +33,10 @@ export class UserService {
     headers.append('Content-Type', 'application/json');
 
     const body = JSON.stringify(user);
-    console.log(body);
 
     return this.http
-      .post(this.URL + 'Account/Register', body, headers)
-      .map((response: Response) => response.json())
-      .map(response =>{
-        console.log(response);
-        return response;
-      })
+      .post(this.URL + '/register', body, {headers})
+      .map((response: Response) => {console.log(response); return response})
       .catch(this.handleError);
   }
 
