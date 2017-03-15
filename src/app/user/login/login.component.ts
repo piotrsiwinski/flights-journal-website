@@ -20,6 +20,6 @@ export class LoginComponent implements OnInit {
   onLoginFormSubmit(){
     this.userService
       .login(this.user)
-      .subscribe(response => console.log(response), (err)=>console.log(err));
+      .subscribe(response => {}, (err)=>console.log(err));
   }
 }

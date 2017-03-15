@@ -7,19 +7,40 @@ import {Observable} from "rxjs";
 @Injectable()
 export class UserService {
   private URL = "http://192.168.1.20:8080/";
+  private AuthToken: string;
 
   constructor(private http: Http) {
 
   }
 
-  login(user : User){
+  login(user: User){
+    let token = 'Basic ' + btoa(user.login + ":" + user.password);
+
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', token);
+
+    console.log(`headers: ${JSON.stringify(headers, null, 2)}`);
+    return this.http
+      .get(this.URL + 'auth', { withCredentials: true, headers: headers})
+      .map((response: Response) => {
+        if(response.status == 200){
+          console.log(response);
+          this.AuthToken = token;
+          console.log(` I am authemticated. This is my token ${this.AuthToken}`);
+        }
+      })
+      .catch(this.handleError);
+  }
+
+  login2(user : User){
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     const body = JSON.stringify(user);
     console.log(body);
 
     return this.http
-      .post(this.URL + 'Account/Register', body, headers)
+      .post(this.URL + 'auth', body, headers)
       .map((response: Response)=> response.json())
       .map(response => {
         console.log(typeof(response));
