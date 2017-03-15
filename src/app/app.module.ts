@@ -20,6 +20,8 @@ import {CompanyComponent} from "./home/company-tst/company.component";
 import { LoginComponent } from './user/login/login.component';
 import {UserService} from "./user/user.service";
 import { RegisterComponent } from './user/register/register.component';
+import { FlightComponent } from './flight/flight.component';
+import { FlightsListComponent } from './flight/flights-list/flights-list.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { RegisterComponent } from './user/register/register.component';
     CompanyComponent,
     UserComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    FlightComponent,
+    FlightsListComponent
   ],
   imports: [
     BrowserModule,
