@@ -16,18 +16,12 @@ export class NavigationComponent implements OnInit {
 
   ngOnInit() {
     this.userService.LogIn.subscribe((token: string) => {
-      if(token){
-        this.isLoggedIn = true;
-      }else {
-        this.isLoggedIn = false;
-      }
+      console.log(token);
+      this.isLoggedIn = token !== null;
     });
-    // console.log(`ngOnInit: ${JSON.stringify(this.isLoggedIn.toString())}`);
-
-
   }
   onLogoutClick(){
-    this.isLoggedIn = null;
+    this.isLoggedIn = false;
     this.router.navigate(['/']);
 
   }
