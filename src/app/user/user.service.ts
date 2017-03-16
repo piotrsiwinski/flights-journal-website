@@ -1,18 +1,22 @@
-import { Injectable } from '@angular/core';
+import {Injectable, EventEmitter} from '@angular/core';
 import {Http, Headers, Response} from "@angular/http";
 import {User} from "../models/user";
 import 'rxjs/Rx';
 import {Observable} from "rxjs";
+import {userInfo} from "os";
 
 @Injectable()
 export class UserService {
-  private URL = "http://192.168.1.20:8080/";
+  // private URL = "http://192.168.1.20:8080/";
+  private URL = "http://172.20.10.2:8080/";
   private AuthToken: string;
 
+  LogIn: EventEmitter<string> = new EventEmitter<string>();
+
   constructor(private http: Http) {
+    //this.LogIn.emit(this.AuthToken);
 
   }
-
   login(user: User){
     let token = 'Basic ' + btoa(user.login + ":" + user.password);
 
@@ -26,24 +30,9 @@ export class UserService {
         if(response.status == 200){
           console.log(`Authenticated: ${JSON.stringify(response, null, 2)}`);
           this.AuthToken = token;
+          this.LogIn.emit(this.AuthToken);
         }
         return response.json();
-      })
-      .catch(this.handleError);
-  }
-
-  login2(user : User){
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    const body = JSON.stringify(user);
-    console.log(body);
-
-    return this.http
-      .post(this.URL + 'auth', body, headers)
-      .map((response: Response)=> response.json())
-      .map(response => {
-        console.log(typeof(response));
-        localStorage.setItem('Auth', response.token)
       })
       .catch(this.handleError);
   }
@@ -58,6 +47,12 @@ export class UserService {
       .post(this.URL + '/register', body, {headers})
       .map((response: Response) => {console.log(response); return response})
       .catch(this.handleError);
+  }
+
+  logout(){
+    this.AuthToken = null;
+    console.log('logout on click')
+    this.LogIn.emit(this.AuthToken);
   }
 
   private handleError(error: Response | any){
