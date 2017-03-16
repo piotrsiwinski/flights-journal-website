@@ -14,8 +14,6 @@ export class UserService {
   LogIn: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private http: Http) {
-    //this.LogIn.emit(this.AuthToken);
-
   }
   login(user: User){
     let token = 'Basic ' + btoa(user.login + ":" + user.password);
