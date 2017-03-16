@@ -51,7 +51,6 @@ export class UserService {
 
   logout(){
     this.AuthToken = null;
-    console.log('logout on click')
     this.LogIn.emit(this.AuthToken);
   }
 

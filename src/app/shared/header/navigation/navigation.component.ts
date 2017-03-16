@@ -21,8 +21,6 @@ export class NavigationComponent implements OnInit {
     });
   }
   onLogoutClick(){
-    this.isLoggedIn = false;
-    this.router.navigate(['/']);
-
+    this.userService.logout();
   }
 }
