@@ -14,14 +14,12 @@ import {RouterModule} from "@angular/router";
 import {appRoutes} from "./app.routing";
 import { UserComponent } from './user/user.component';
 import {HomeComponent} from "./home/home.component";
-import {CompanyComponent} from "./home/company-tst/company.component";
 import { LoginComponent } from './user/login/login.component';
 import {UserService} from "./user/user.service";
 import { RegisterComponent } from './user/register/register.component';
 import { FlightComponent } from './flight/flight.component';
 import { FlightsListComponent } from './flight/flights-list/flights-list.component';
 import { AccountComponent } from './user/account/account.component';
-import { CalloutsComponent } from './home/callouts/callouts.component';
 
 @NgModule({
   declarations: [
@@ -31,14 +29,12 @@ import { CalloutsComponent } from './home/callouts/callouts.component';
     BannerComponent,
     HomeComponent,
     FooterComponent,
-    CompanyComponent,
     UserComponent,
     LoginComponent,
     RegisterComponent,
     FlightComponent,
     FlightsListComponent,
-    AccountComponent,
-    CalloutsComponent
+    AccountComponent
   ],
   imports: [
     BrowserModule,
