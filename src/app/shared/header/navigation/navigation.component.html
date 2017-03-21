@@ -6,35 +6,14 @@
       <a class="navbar-brand" routerLink="/"><img src="images/logo-yellow.png" class="logo-change" alt="Royal"/></a> </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-      <ul *ngIf="!isLoggedIn" class="mobile-menu nav navbar-nav">
-        <li class="active"><a routerLink="/"><span class="fa fa-home"></span></a></li>
-        <li><a routerLink="/login">Login</a></li>
-
-      </ul>
-
       <ul class="mobile-menu nav navbar-nav">
+        <li class="active"><a routerLink="/"><span class="fa fa-home"></span></a></li>
         <li><a routerLink="/"><span>Contact</span></a></li>
-      </ul>
-
-      <ul class="mobile-menu nav navbar-nav">
         <li><a routerLink="/"><span>About</span></a></li>
+        <li *ngIf="!isLoggedIn" ><a routerLink="/login">Login</a></li>
+        <li *ngIf="isLoggedIn"><a routerLink="/account">My Account</a></li>
+        <li *ngIf="isLoggedIn"><a href="/" (click)="onLogoutClick()">Logout</a></li>
       </ul>
-
-      <ul *ngIf="isLoggedIn" class="mobile-menu nav navbar-nav">
-        <li class="active"><a routerLink="/"><span class="fa fa-home"></span></a></li>
-        <li><a routerLink="/account">My Account</a></li>
-        <!--<li><button (click)="onLogoutClick()">Logout</button></li>-->
-        <li><a href="/" (click)="onLogoutClick()">Logout</a></li>
-
-      </ul>
-
-
-
-
-
-
-
 
     </div>
     <!-- /.navbar-collapse -->
