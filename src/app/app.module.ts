@@ -23,6 +23,7 @@ import { RegisterComponent } from './user/register/register.component';
 import { FlightComponent } from './flight/flight.component';
 import { FlightsListComponent } from './flight/flights-list/flights-list.component';
 import { AccountComponent } from './user/account/account.component';
+import { CalloutsComponent } from './home/callouts/callouts.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { AccountComponent } from './user/account/account.component';
     RegisterComponent,
     FlightComponent,
     FlightsListComponent,
-    AccountComponent
+    AccountComponent,
+    CalloutsComponent
   ],
   imports: [
     BrowserModule,

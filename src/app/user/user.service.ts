@@ -7,8 +7,8 @@ import {userInfo} from "os";
 
 @Injectable()
 export class UserService {
-  // private URL = "http://139.59.144.209:8080/";
-  private URL = "http://192.168.1.20:8080/";
+  private URL = "http://139.59.144.209:8080/flightsjournal/";
+  // private URL = "http://192.168.1.20:8080/";
 
   private AuthToken: string;
 
