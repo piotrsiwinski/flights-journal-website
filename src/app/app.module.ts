@@ -22,6 +22,7 @@ import {UserService} from "./user/user.service";
 import { RegisterComponent } from './user/register/register.component';
 import { FlightComponent } from './flight/flight.component';
 import { FlightsListComponent } from './flight/flights-list/flights-list.component';
+import { AccountComponent } from './user/account/account.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { FlightsListComponent } from './flight/flights-list/flights-list.compone
     LoginComponent,
     RegisterComponent,
     FlightComponent,
-    FlightsListComponent
+    FlightsListComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,
