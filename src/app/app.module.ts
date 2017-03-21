@@ -5,10 +5,8 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/header/header.component';
-import { TopWrapperComponent } from './shared/header/top-wrapper/top-wrapper.component';
 import { NavigationComponent } from './shared/header/navigation/navigation.component';
-import { BannerComponent } from './shared/header/banner/banner.component';
-import { FeatureComponent } from './shared/header/feature/feature.component';
+import { BannerComponent } from './shared/banner/banner.component';
 
 import { FooterComponent } from './shared/footer/footer.component';
 
@@ -29,10 +27,8 @@ import { CalloutsComponent } from './home/callouts/callouts.component';
   declarations: [
     AppComponent,
     HeaderComponent,
-    TopWrapperComponent,
     NavigationComponent,
     BannerComponent,
-    FeatureComponent,
     HomeComponent,
     FooterComponent,
     CompanyComponent,
