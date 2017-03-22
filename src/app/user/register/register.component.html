@@ -5,16 +5,60 @@
       <div class="col-sm-12">
         <div class="row">
           <div class="col-sm-6 space">
-            <div class="form">
-              <h3>Register Form</h3>
-              <form method="post" (ngSubmit)="onRegisterFormSubmit()" name="Login_Form" class="form-signin">
-                <input class="txt" name="Email" placeholder="Email" required type="text" [(ngModel)]="user.email">
-                <input class="txt" name="Login" placeholder="Login" required type="text" [(ngModel)]="user.login">
-                <input class="txt" name="Password" placeholder="Password" required type="password" [(ngModel)]="user.password">
-                <input class="txt" name="Password" placeholder="Confirm password" required type="password" [(ngModel)]="user.confirmPassword">
-                <button name="submit" class="txt2" type="submit">Register</button>
-              </form>
+            <div [hidden]="userCreated">
+
+              <div class="form">
+                <h3>Create new account</h3>
+                <hr>
+
+                <form method="post" (ngSubmit)="onRegisterFormSubmit()" name="RegisterForm" class="form-signin" #registerForm="ngForm">
+
+                  <div class="form-group">
+                    <input id="Email" class="txt" name="Email" placeholder="Email" type="text" [(ngModel)]="user.email" required #email = "ngModel" pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?">
+                    <div [hidden]="email.valid || email.pristine" class="alert alert-danger">Email is required</div>
+                  </div>
+
+                  <div class="form-group">
+                    <input id="Login" class="txt" name="Login" placeholder="Login" type="text" [(ngModel)]="user.login" required>
+                    <span class="text-danger"></span>
+                  </div>
+
+                  <div class="form-group">
+                    <input id="Password" class="txt" name="Password" placeholder="Password" type="password" [(ngModel)]="user.password" required>
+                    <span class="text-danger"></span>
+                  </div>
+
+                  <div class="form-group">
+                    <input id="ConfirmPassword" class="txt" name="ConfirmPassword" placeholder="Confirm password" type="password" [(ngModel)]="user.confirmPassword" required>
+                    <span class="text-danger"></span>
+                  </div>
+
+                  <div class="form-group">
+                    <button [disabled]="!registerForm.form.valid" name="submit" class="btn txt2" type="submit">Register</button>
+                  </div>
+
+                </form>
+              </div>
             </div>
+
+            <div [hidden]="!userCreated">
+              <div class="title">
+                <h2>Congratulations!</h2>
+                <span class="title-border"></span>
+                <p>Your account has been created</p>
+                <p>Go to your email and activate your account</p>
+              </div>
+            </div>
+
+            <div [hidden]="userCreated" *ngIf="errorMessage">
+              <div class="alert alert-danger"> {{errorMessage}}</div>
+            </div>
+
+            <!--<div>
+              <span [hidden]="registerForm.form.valid"> Formularz nie poprawny</span>
+              <span [hidden]="!registerForm.form.valid"> Formularz poprawny</span>
+            </div>-->
+
           </div>
         </div>
 
