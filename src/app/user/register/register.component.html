@@ -7,8 +7,8 @@
           <div class="col-sm-6 space">
             <div class="form">
               <h3>Register Form</h3>
-              <form method="post" (ngSubmit)="onLoginFormSubmit()" name="Login_Form" class="form-signin">
-                <input class="txt" name="Username" placeholder="Username" required type="text" [(ngModel)]="user.email">
+              <form method="post" (ngSubmit)="onRegisterFormSubmit()" name="Login_Form" class="form-signin">
+                <input class="txt" name="Email" placeholder="Email" required type="text" [(ngModel)]="user.email">
                 <input class="txt" name="Login" placeholder="Login" required type="text" [(ngModel)]="user.login">
                 <input class="txt" name="Password" placeholder="Password" required type="password" [(ngModel)]="user.password">
                 <input class="txt" name="Password" placeholder="Confirm password" required type="password" [(ngModel)]="user.confirmPassword">

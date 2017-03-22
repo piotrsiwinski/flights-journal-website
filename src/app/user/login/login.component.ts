@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {User} from "../../models/user";
-import {UserService} from "../user.service";
-import {Router} from "@angular/router";
+import { Component, OnInit }  from '@angular/core';
+import { Router }             from "@angular/router";
+import { User }               from "../../models/user";
+import { UserService }        from "../user.service";
 
 @Component({
   selector: 'app-login',
@@ -21,6 +21,8 @@ export class LoginComponent implements OnInit {
   onLoginFormSubmit(){
     this.userService
       .login(this.user)
-      .subscribe(response => { this.router.navigate(['/'])}, (err)=>console.log(err));
+      .subscribe(() => this.router.navigate(['/']),
+        (err)=>console.log(err)
+      );
   }
 }

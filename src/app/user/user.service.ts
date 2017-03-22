@@ -7,7 +7,7 @@ import {userInfo} from "os";
 
 @Injectable()
 export class UserService {
-  private URL = "http://139.59.144.209:8080/flightsjournal/";
+  private URL = "http://139.59.144.209:8080/flightsjournal";
   // private URL = "http://192.168.1.20:8080/";
 
   private AuthToken: string;
@@ -16,6 +16,7 @@ export class UserService {
 
   constructor(private http: Http) {
   }
+
   login(user: User){
     let token = 'Basic ' + btoa(user.login + ":" + user.password);
 
@@ -24,7 +25,7 @@ export class UserService {
     headers.append('Authorization', token);
 
     return this.http
-      .get(this.URL + 'auth', { withCredentials: true, headers: headers})
+      .get(this.URL + '/auth', { withCredentials: true, headers: headers})
       .map((response: Response) => {
         if(response.status == 200){
           console.log(`Authenticated: ${JSON.stringify(response, null, 2)}`);
@@ -43,7 +44,7 @@ export class UserService {
     const body = JSON.stringify(user);
 
     return this.http
-      .post(this.URL + '/register', body, {headers})
+      .post(this.URL + '/register', body, {headers: headers})
       .map((response: Response) => {console.log(response); return response})
       .catch(this.handleError);
   }
