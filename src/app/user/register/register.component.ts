@@ -11,14 +11,12 @@ import {FormGroup, FormBuilder, Validators} from "@angular/forms";
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  registerForm: FormGroup
-  user: User = new User('','','', '');
-  userCreated = false;
+  registerForm: FormGroup;
+  userCreated: Boolean = false;
   errorMessage: string;
 
   constructor(
     private authService: AuthService,
-    private router: Router,
     private formBuilder: FormBuilder
   ) {}
 
@@ -35,11 +33,4 @@ export class RegisterComponent implements OnInit {
     console.log(this.registerForm.value);
     this.authService.register(this.registerForm.value).subscribe(()=>this.userCreated = true, err => this.errorMessage = err.toString());
   }
-  onRegisterFormSubmit(){
-    this.authService
-      .register(this.user)
-      .subscribe(() => {this.userCreated = true}, err => {this.errorMessage = err.toString()});
-  }
-
-
 }
