@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from "../../../user/user.service";
 import {Router} from "@angular/router";
+import {AuthService} from "../../../core/auth.service";
 
 @Component({
   selector: 'app-navigation',
@@ -10,17 +11,18 @@ import {Router} from "@angular/router";
 export class NavigationComponent implements OnInit {
   isLoggedIn: boolean = false;
 
-  constructor(private userService: UserService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router) {
 
   }
 
   ngOnInit() {
-    this.userService.LogIn.subscribe((token: string) => {
+    this.authService.LogIn.subscribe((token: string) => {
       console.log(token);
       this.isLoggedIn = token !== null;
     });
   }
   onLogoutClick(){
-    this.userService.logout();
+    this.authService.logout();
   }
 }
+

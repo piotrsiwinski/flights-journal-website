@@ -1,3 +1,4 @@
+
 import {Injectable, EventEmitter} from '@angular/core';
 import {Http, Headers, Response} from "@angular/http";
 import {User} from "../models/user";
@@ -5,7 +6,8 @@ import 'rxjs/Rx';
 import {Observable} from "rxjs";
 
 @Injectable()
-export class UserService {
+export class AuthService {
+
   private URL = "http://139.59.144.209:8080/flightsjournal";
   // private URL = "http://192.168.1.20:8080/";
 
@@ -59,6 +61,5 @@ export class UserService {
     let errorMsg: string = "error";
     return Observable.throw(errorMsg);
   }
-
 
 }

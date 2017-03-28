@@ -2,6 +2,7 @@ import { Component, OnInit }  from '@angular/core';
 import { Router }             from "@angular/router";
 import { User }               from "../../models/user";
 import { UserService }        from "../user.service";
+import {AuthService} from "../../core/auth.service";
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,7 @@ import { UserService }        from "../user.service";
 })
 export class LoginComponent implements OnInit {
   user: User = new User('', '', '');
-  constructor(private userService: UserService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router) {
 
   }
 
@@ -19,7 +20,7 @@ export class LoginComponent implements OnInit {
   }
 
   onLoginFormSubmit(){
-    this.userService
+    this.authService
       .login(this.user)
       .subscribe(() => this.router.navigate(['/']),
         (err)=>console.log(err)

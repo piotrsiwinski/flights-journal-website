@@ -15,13 +15,13 @@ import {appRoutes} from "./app.routing";
 import { UserComponent } from './user/user.component';
 import {HomeComponent} from "./home/home.component";
 import { LoginComponent } from './user/login/login.component';
-import {UserService} from "./user/user.service";
 import { RegisterComponent } from './user/register/register.component';
 import { FlightComponent } from './flight/flight.component';
 import { FlightsListComponent } from './flight/flights-list/flights-list.component';
 import { AccountComponent } from './user/account/account.component';
 import { ContactComponent } from './home/contact/contact.component';
 import { AboutComponent } from './home/about/about.component';
+import {AuthService} from "./core/auth.service";
 
 @NgModule({
   declarations: [
@@ -47,7 +47,7 @@ import { AboutComponent } from './home/about/about.component';
     RouterModule.forRoot(appRoutes)
 
   ],
-  providers: [UserService],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
