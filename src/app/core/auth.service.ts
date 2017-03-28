@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment.prod';
 
 import {Injectable, EventEmitter} from '@angular/core';
 import {Http, Headers, Response} from "@angular/http";
@@ -8,14 +9,12 @@ import {Observable} from "rxjs";
 @Injectable()
 export class AuthService {
 
-  private URL = "http://139.59.144.209:8080/flightsjournal";
-  // private URL = "http://192.168.1.20:8080/";
-
+  private URL = `${environment.baseApiUrl}`;
   private AuthToken: string;
-
   LogIn: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private http: Http) {
+    console.log(`auth url: ${this.URL}`);
   }
 
   login(user: User){
