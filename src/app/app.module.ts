@@ -22,6 +22,9 @@ import { AccountComponent } from './user/account/account.component';
 import { ContactComponent } from './home/contact/contact.component';
 import { AboutComponent } from './home/about/about.component';
 import {AuthService} from "./core/auth.service";
+import { AirportComponent } from './airport/airport.component';
+import { AirportsListComponent } from './airport/airports-list/airports-list.component';
+import { AirportItemComponent } from './airport/airport-item/airport-item.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,10 @@ import {AuthService} from "./core/auth.service";
     FlightsListComponent,
     AccountComponent,
     ContactComponent,
-    AboutComponent
+    AboutComponent,
+    AirportComponent,
+    AirportsListComponent,
+    AirportItemComponent
   ],
   imports: [
     BrowserModule,

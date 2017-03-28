@@ -6,6 +6,7 @@ import {RegisterComponent} from "./user/register/register.component";
 import {AccountComponent} from "./user/account/account.component";
 import {AboutComponent} from "./home/about/about.component";
 import {ContactComponent} from "./home/contact/contact.component";
+import {AirportComponent} from "./airport/airport.component";
 
 const appRoutes : Routes = [
   { path: '',             component: HomeComponent },
@@ -15,6 +16,7 @@ const appRoutes : Routes = [
   { path: 'account',      component: AccountComponent },
   { path: 'contact',      component: ContactComponent },
   { path: 'about',        component: AboutComponent },
+  { path: 'airport',      component: AirportComponent },
 ];
 
 export {appRoutes};
