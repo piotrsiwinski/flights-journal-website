@@ -16,7 +16,7 @@ export class AirportsListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.airportService.getAirports().subscribe(airports => this.airports = airports.slice(0, 10), error => console.log(error));
+    this.airportService.searchAirports.subscribe(airports => this.airports = airports, error => console.log(error));
   }
 
   onClick(airport: AirportViewModel){

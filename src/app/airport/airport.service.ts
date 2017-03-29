@@ -13,17 +13,23 @@ export class AirportService {
   private URL: string = environment.baseApiUrl;
 
   selectAirport: EventEmitter<AirportViewModel> = new EventEmitter<AirportViewModel>();
+  searchAirports: EventEmitter<AirportViewModel[]> = new EventEmitter<AirportViewModel[]>();
 
   constructor(private http: Http) {
 
   }
 
-  getAirports() : Observable<AirportViewModel[]>{
+  getAllAirports() : Observable<AirportViewModel[]>{
     return this.http.get(this.URL + '/airport/all')
                     .map(this.extractData)
                     .catch(this.handleError);
   }
 
+  getAirports(name: string) : Observable<AirportViewModel[]>{
+    return this.http.get(this.URL + `/airport/${name}`)
+                    .map(this.extractData)
+                    .catch(this.handleError);
+  }
 
   private extractData(res: Response) {
     let body = res.json();

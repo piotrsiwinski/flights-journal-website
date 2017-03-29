@@ -2,7 +2,7 @@
 <hr>
 <app-airport-search></app-airport-search>
 
-<table class="table table-bordered table-stripped">
+<table *ngIf="airports" class="table table-bordered table-stripped">
   <thead>
     <tr>
       <th>Name</th>

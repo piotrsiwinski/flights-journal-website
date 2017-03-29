@@ -26,6 +26,7 @@ import { AirportComponent } from './airport/airport.component';
 import { AirportsListComponent } from './airport/airports-list/airports-list.component';
 import { AirportItemComponent } from './airport/airport-item/airport-item.component';
 import {AirportService} from "./airport/airport.service";
+import { AirportSearchComponent } from './airport/airport-search/airport-search.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import {AirportService} from "./airport/airport.service";
     AboutComponent,
     AirportComponent,
     AirportsListComponent,
-    AirportItemComponent
+    AirportItemComponent,
+    AirportSearchComponent
   ],
   imports: [
     BrowserModule,
