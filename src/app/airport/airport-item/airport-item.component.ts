@@ -20,4 +20,8 @@ export class AirportItemComponent implements OnInit {
     this.airportService.selectAirport.subscribe(airport => this.selectedAirport = airport);
   }
 
+  onClick(){
+    this.selectedAirport = null;
+  }
+
 }

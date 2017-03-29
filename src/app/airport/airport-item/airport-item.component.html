@@ -1,24 +1,17 @@
-<div *ngIf="selectedAirport" class="inner-page-wrapper">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
+<div *ngIf="selectedAirport">
+  <h3>Airport details</h3>
+  <div >
+    <p>User data</p>
+    <hr>
+    <dl class="dl-horizontal">
+      <dt>Name</dt>
+      <dd>{{selectedAirport.name}}</dd>
+      <dt>iataName</dt>
+      <dd>{{selectedAirport.iata}}</dd>
+      <dt>id</dt>
+      <dd>{{selectedAirport.id}}</dd>
+    </dl>
 
-        <h3>Airport details</h3>
-        <div >
-          <p>User data</p>
-          <hr>
-          <dl class="dl-horizontal">
-            <dt>Name</dt>
-            <dd>{{selectedAirport.name}}</dd>
-            <dt>iataName</dt>
-            <dd>{{selectedAirport.iata}}</dd>
-            <dt>id</dt>
-            <dd>{{selectedAirport.id}}</dd>
-          </dl>
-
-        </div>
-
-      </div>
-    </div>
   </div>
+  <button class="btn txt2" (click)="onClick()">Hide</button>
 </div>

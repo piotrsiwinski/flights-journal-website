@@ -19,8 +19,14 @@ export class AirportsListComponent implements OnInit {
     this.airportService.searchAirports.subscribe(airports => this.airports = airports, error => console.log(error));
   }
 
-  onClick(airport: AirportViewModel){
+  onSearchClick(airport: AirportViewModel){
     this.airportService.selectAirport.emit(airport);
+  }
+
+  onClearClick(){
+    this.airports.length = 0;
+    this.airports = null;
+
   }
 
 }

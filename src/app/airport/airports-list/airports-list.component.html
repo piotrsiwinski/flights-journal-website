@@ -2,15 +2,25 @@
 <hr>
 <app-airport-search></app-airport-search>
 
-<table *ngIf="airports" class="table table-bordered table-stripped">
-  <thead>
-    <tr>
-      <th>Name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let airport of airports">
-      <td><a (click)="onClick(airport)">{{airport.name}}</a></td>
-    </tr>
-  </tbody>
-</table>
+<div *ngIf="airports && airports.length==0">
+  <span>Not found</span>
+</div>
+
+<div *ngIf="airports && airports.length>0">
+  <table class="table table-bordered table-stripped">
+    <thead>
+      <tr>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let airport of airports">
+        <td><a (click)="onSearchClick(airport)">{{airport.name}}</a></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button class="btn txt2" (click)="onClearClick()">Clear</button>
+</div>
+
+
