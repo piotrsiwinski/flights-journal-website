@@ -5,16 +5,11 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>IATA</th>
-      <th>Details</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let airport of airports">
-      <td>{{airport.name}}</td>
-      <td>{{airport.iata}}</td>
-      <td><a [routerLink]="['/airport', airport.id]">Details</a></td>
-      <td><a (click)="onClick(airport)">Test</a></td>
+      <td><a (click)="onClick(airport)">{{airport.name}}</a></td>
     </tr>
   </tbody>
 </table>

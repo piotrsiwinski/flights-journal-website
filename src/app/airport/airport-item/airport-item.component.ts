@@ -17,8 +17,7 @@ export class AirportItemComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    let id = this.route.snapshot.params['id'];
-    this.airportService.getAirports().subscribe(data => this.selectedAirport = data.filter(x => x.id == id)[0]);
+    this.airportService.selectAirport.subscribe(airport => this.selectedAirport = airport);
   }
 
 }

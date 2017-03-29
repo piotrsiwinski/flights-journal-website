@@ -12,8 +12,7 @@ export class AirportsListComponent implements OnInit {
   airports: AirportViewModel[];
 
   constructor(
-    private airportService: AirportService,
-    private router: Router
+    private airportService: AirportService
   ) { }
 
   ngOnInit() {
@@ -22,7 +21,6 @@ export class AirportsListComponent implements OnInit {
 
   onClick(airport: AirportViewModel){
     this.airportService.selectAirport.emit(airport);
-
   }
 
 }
