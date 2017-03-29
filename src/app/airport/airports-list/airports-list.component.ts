@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AirportViewModel} from "../../models/airport-view-model";
 import {AirportService} from "../airport.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-airports-list',
@@ -10,10 +11,18 @@ import {AirportService} from "../airport.service";
 export class AirportsListComponent implements OnInit {
   airports: AirportViewModel[];
 
-  constructor(private airportService: AirportService) { }
+  constructor(
+    private airportService: AirportService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.airportService.getAirports().subscribe(airports => this.airports = airports.slice(0, 10), error => console.log(error));
+  }
+
+  onClick(airport: AirportViewModel){
+    this.airportService.selectAirport.emit(airport);
+
   }
 
 }

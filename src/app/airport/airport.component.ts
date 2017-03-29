@@ -4,8 +4,7 @@ import {AirportService} from "./airport.service";
 @Component({
   selector: 'app-airport',
   templateUrl: './airport.component.html',
-  styleUrls: ['./airport.component.css'],
-  providers: [AirportService]
+  styleUrls: ['./airport.component.css']
 })
 export class AirportComponent implements OnInit {
 

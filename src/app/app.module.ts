@@ -25,6 +25,8 @@ import {AuthService} from "./core/auth.service";
 import { AirportComponent } from './airport/airport.component';
 import { AirportsListComponent } from './airport/airports-list/airports-list.component';
 import { AirportItemComponent } from './airport/airport-item/airport-item.component';
+import {AirportService} from "./airport/airport.service";
+import { TestComponent } from './airport/test/test.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,8 @@ import { AirportItemComponent } from './airport/airport-item/airport-item.compon
     AboutComponent,
     AirportComponent,
     AirportsListComponent,
-    AirportItemComponent
+    AirportItemComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +57,7 @@ import { AirportItemComponent } from './airport/airport-item/airport-item.compon
     RouterModule.forRoot(appRoutes)
 
   ],
-  providers: [AuthService],
+  providers: [AuthService, AirportService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

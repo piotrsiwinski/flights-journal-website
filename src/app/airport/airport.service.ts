@@ -1,6 +1,6 @@
 import {environment} from './../../environments/environment.prod';
 
-import { Injectable } from '@angular/core';
+import {Injectable, EventEmitter} from '@angular/core';
 import {Http, Response} from "@angular/http";
 import {AirportViewModel} from "../models/airport-view-model";
 import {map} from "rxjs/operator/map";
@@ -12,6 +12,8 @@ import 'rxjs/add/operator/map';
 export class AirportService {
   private URL: string = environment.baseApiUrl;
 
+  selectAirport: EventEmitter<AirportViewModel> = new EventEmitter<AirportViewModel>();
+
   constructor(private http: Http) {
 
   }
@@ -21,6 +23,7 @@ export class AirportService {
                     .map(this.extractData)
                     .catch(this.handleError);
   }
+
 
   private extractData(res: Response) {
     let body = res.json();

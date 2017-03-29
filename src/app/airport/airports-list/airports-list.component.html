@@ -13,7 +13,8 @@
     <tr *ngFor="let airport of airports">
       <td>{{airport.name}}</td>
       <td>{{airport.iata}}</td>
-      <td><button class="btn">Details</button></td>
+      <td><a [routerLink]="['/airport', airport.id]">Details</a></td>
+      <td><a (click)="onClick(airport)">Test</a></td>
     </tr>
   </tbody>
 </table>
