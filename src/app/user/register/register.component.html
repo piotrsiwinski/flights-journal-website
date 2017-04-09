@@ -15,6 +15,13 @@
                 <h3>Create new account</h3>
                 <hr>
 
+                <div *ngIf="errorMessage">
+                  <span class="text-danger"> <strong>Can't create user</strong>
+                    <p>{{errorMessage}}</p>
+                  </span>
+
+                </div>
+
                 <form [formGroup]="registerForm" method="post" (ngSubmit)="onSubmit()" class="form-signin">
 
                   <div class="form-group">
@@ -60,10 +67,6 @@
                 <p>Your account has been created</p>
                 <p>Go to your email and activate your account</p>
               </div>
-            </div>
-
-            <div [hidden]="userCreated" *ngIf="errorMessage">
-              <div class="alert alert-danger"> {{errorMessage}}</div>
             </div>
 
           </div>

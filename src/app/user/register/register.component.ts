@@ -4,6 +4,8 @@ import {UserService} from "../user.service";
 import {Router} from "@angular/router";
 import {AuthService} from "../../core/auth.service";
 import {FormGroup, FormBuilder, Validators, FormControl} from "@angular/forms";
+import {Response} from "@angular/http";
+import {CustomValidators} from "../../utils/custom-validators";
 
 @Component({
   selector: 'app-register',
@@ -14,57 +16,6 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   userCreated: Boolean = false;
   errorMessage: string;
-
-  constructor(private authService: AuthService,
-              private formBuilder: FormBuilder) {
-  }
-
-  ngOnInit() {
-    this.buildForm();
-  }
-
-  buildForm(): void {
-    this.registerForm = this.formBuilder.group({
-      email: ['', [Validators.required, this.emailValidator]],
-      login: ['', [Validators.required]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', [Validators.required, Validators.minLength(6)]]
-    });
-
-    this.registerForm.valueChanges.subscribe(data => this.onValueChanged(data));
-    this.onValueChanged();
-  }
-
-  // Validators.pattern("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
-
-  emailValidator(control: FormControl): {[key: string]: boolean}{
-    if(control.value === 'test'){
-      return { incorrectEmail: true };
-    }
-    return null;
-  }
-
-
-  onValueChanged(data?: any) {
-    if (!this.registerForm) {
-      return;
-    }
-
-    const form = this.registerForm;
-
-    for (const field in this.formErrors) {
-      // clear previous error message (if any)
-      this.formErrors[field] = '';
-      const control = form.get(field);
-      if (control && control.dirty && !control.valid) {
-        const messages = this.validationMessages[field];
-        for (const key in control.errors) {
-          this.formErrors[field] += messages[key] + ' ';
-        }
-      }
-    }
-  }
-
   formErrors = {
     'email': '',
     'login': '',
@@ -92,10 +43,58 @@ export class RegisterComponent implements OnInit {
     }
   };
 
-  onSubmit() {
-    console.log(this.registerForm);
-    this.authService.register(this.registerForm.value).subscribe(() => this.userCreated = true, err => this.errorMessage = err.toString());
+  constructor(
+    private authService: AuthService,
+    private formBuilder: FormBuilder
+  ){}
+
+  ngOnInit() {
+    this.buildForm();
   }
 
+  buildForm(): void {
+    this.registerForm = this.formBuilder.group({
+      email: ['', [Validators.required, CustomValidators.emailValidator]],
+      login: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(6)]]
+    });
+
+    this.registerForm.valueChanges.subscribe(data => this.onValueChanged(data));
+    this.onValueChanged();
+  }
+
+  onValueChanged(data?: any) {
+    if (!this.registerForm) {
+      return;
+    }
+    const form = this.registerForm;
+
+    for (const field in this.formErrors) {
+      // clear previous error message (if any)
+      this.formErrors[field] = '';
+      const control = form.get(field);
+      if (control && control.dirty && !control.valid) {
+        const messages = this.validationMessages[field];
+        for (const key in control.errors) {
+          this.formErrors[field] += messages[key] + ' ';
+        }
+      }
+    }
+  }
+
+  onSubmit() {
+    console.log(this.registerForm);
+    this.authService.register(this.registerForm.value).subscribe(this.onSubmitSuccess, this.onSubmitError);
+  }
+
+  onSubmitSuccess = (response: Response) =>{
+      this.errorMessage = null;
+      this.userCreated = true;
+  };
+
+  onSubmitError = (err: any) => {
+    this.errorMessage = err.toString();
+  }
 
 }

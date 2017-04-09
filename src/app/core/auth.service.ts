@@ -45,7 +45,10 @@ export class AuthService {
 
     return this.http
       .post(this.URL + '/register', body, {headers: headers})
-      .map((response: Response) => {console.log(response); return response})
+      .map((response: Response) => {console.log(response);
+        if(response.status == 200){
+          return response}
+        })
       .catch(this.handleError);
   }
 
@@ -56,9 +59,12 @@ export class AuthService {
 
   private handleError(error: Response | any){
     console.log(error);
+    let errorMsg: string;
+    if(error.status == 409){
+      errorMsg = 'User with this login already exists'
+    }
 
-    let errorMsg: string = "error";
-    return Observable.throw(errorMsg);
+    return Observable.throw(errorMsg || error.toString());
   }
 
 }
