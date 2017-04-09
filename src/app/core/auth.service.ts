@@ -53,6 +53,7 @@ export class AuthService {
 
   private handleError(error: Response | any) {
     let errorsDescription = {
+      401: 'User unauthorized',
       409: 'User with this login already exists'
     };
     return Observable.throw(errorsDescription[error.status] || error.toString());
