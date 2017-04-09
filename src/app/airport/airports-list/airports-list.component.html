@@ -16,6 +16,7 @@
     <tbody>
       <tr *ngFor="let airport of airports">
         <td><a (click)="onSearchClick(airport)">{{airport.name}}</a></td>
+        <td><a  [routerLink]="['/airport', airport.name]">{{airport.name}}</a></td>
       </tr>
     </tbody>
   </table>

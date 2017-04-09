@@ -1,17 +1,24 @@
-<div *ngIf="selectedAirport">
-  <h3>Airport details</h3>
-  <div >
-    <p>User data</p>
-    <hr>
-    <dl class="dl-horizontal">
-      <dt>Name</dt>
-      <dd>{{selectedAirport.name}}</dd>
-      <dt>iataName</dt>
-      <dd>{{selectedAirport.iata}}</dd>
-      <dt>id</dt>
-      <dd>{{selectedAirport.id}}</dd>
-    </dl>
+<div class="callouts-wrapper">
+  <div class="container">
+    <div *ngIf="selectedAirport">
+      <h3>Airport details</h3>
+      <div>
+        <hr>
+        <dl class="dl-horizontal">
+          <dt>Name</dt>
+          <dd>{{selectedAirport.name}}</dd>
+          <dt>iataName</dt>
+          <dd>{{selectedAirport.iata}}</dd>
+          <dt>id</dt>
+          <dd>{{selectedAirport.id}}</dd>
+        </dl>
 
+      </div>
+      <button class="btn txt2" (click)="onClick()">Return</button>
+      <!--<button class="btn txt2" (click)="onHideButtonClick()">Hide</button>-->
+    </div>
+    <!--<div *ngIf="!selectedAirport">-->
+      <!--<span class="text-danger">Coudnt find airport</span>-->
+    <!--</div>-->
   </div>
-  <button class="btn txt2" (click)="onClick()">Hide</button>
 </div>

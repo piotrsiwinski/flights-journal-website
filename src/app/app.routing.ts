@@ -18,7 +18,7 @@ const appRoutes : Routes = [
   { path: 'contact',      component: ContactComponent },
   { path: 'about',        component: AboutComponent },
   { path: 'airport',      component: AirportComponent },
-  { path: 'airport/:id',  component: AirportItemComponent },
+  { path: 'airport/:name',  component: AirportItemComponent },
 ];
 
 
