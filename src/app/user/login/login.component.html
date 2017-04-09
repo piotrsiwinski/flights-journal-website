@@ -10,6 +10,13 @@
           <div class="col-sm-6 space">
             <h3>Login</h3>
             <hr>
+            <div *ngIf="errorMessage">
+                  <span class="text-danger"> <strong>Can't create user</strong>
+                    <p>{{errorMessage}}</p>
+                  </span>
+
+            </div>
+
             <form [formGroup]="loginForm" method="post" (ngSubmit)="onSubmit()">
               <div class="form-group">
                 <input formControlName="login" type="text" id="username" class="txt" placeholder="Login" required>

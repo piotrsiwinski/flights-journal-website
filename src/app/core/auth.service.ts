@@ -1,4 +1,4 @@
-import { environment } from './../../environments/environment.prod';
+import {environment} from './../../environments/environment.prod';
 
 import {Injectable, EventEmitter} from '@angular/core';
 import {Http, Headers, Response} from "@angular/http";
@@ -17,54 +17,45 @@ export class AuthService {
     console.log(`auth url: ${this.URL}`);
   }
 
-  login(user: User){
+  login(user: User) {
     let token = 'Basic ' + btoa(user.login + ":" + user.password);
 
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', token);
+    let options = {withCredentials: true, headers: headers};
 
     return this.http
-      .get(this.URL + '/auth', { withCredentials: true, headers: headers})
+      .get(this.URL + '/auth', options)
       .map((response: Response) => {
-        if(response.status == 200){
-          console.log(`Authenticated: ${JSON.stringify(response, null, 2)}`);
-          this.AuthToken = token;
-          this.LogIn.emit(this.AuthToken);
-        }
+        this.AuthToken = token;
+        this.LogIn.emit(this.AuthToken);
         return response.json();
       })
       .catch(this.handleError);
   }
 
-  register(user: User){
+  register(user: User) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-
     const body = JSON.stringify(user);
 
     return this.http
       .post(this.URL + '/register', body, {headers: headers})
-      .map((response: Response) => {console.log(response);
-        if(response.status == 200){
-          return response}
-        })
+      .map((response: Response) => response.json())
       .catch(this.handleError);
   }
 
-  logout(){
+  logout() {
     this.AuthToken = null;
     this.LogIn.emit(this.AuthToken);
   }
 
-  private handleError(error: Response | any){
-    console.log(error);
-    let errorMsg: string;
-    if(error.status == 409){
-      errorMsg = 'User with this login already exists'
-    }
-
-    return Observable.throw(errorMsg || error.toString());
+  private handleError(error: Response | any) {
+    let errorsDescription = {
+      409: 'User with this login already exists'
+    };
+    return Observable.throw(errorsDescription[error.status] || error.toString());
   }
 
 }

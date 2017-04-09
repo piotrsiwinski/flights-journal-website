@@ -11,6 +11,7 @@ import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  errorMessage: string;
 
   constructor(
     private authService: AuthService,
@@ -27,7 +28,14 @@ export class LoginComponent implements OnInit {
 
   onSubmit(){
     console.log(this.loginForm.value);
-    this.authService.login(this.loginForm.value).subscribe(()=>{this.router.navigate(['/'])}, (err)=> console.log(err));
+    this.authService.login(this.loginForm.value).subscribe(this.onSubmitSuccess, this.onSubmitError);
+  }
 
+  onSubmitSuccess = () =>{
+    this.router.navigate(['/'])
+  };
+
+  onSubmitError = (err: any) => {
+    this.errorMessage = err.toString();
   }
 }
