@@ -59,4 +59,7 @@ export class AuthService {
     return Observable.throw(errorsDescription[error.status] || error.toString());
   }
 
+  isAuthenticated(): boolean {
+    return this.AuthToken != null;
+  }
 }

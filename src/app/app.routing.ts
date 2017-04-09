@@ -9,13 +9,14 @@ import {ContactComponent} from "./home/contact/contact.component";
 import {AirportComponent} from "./airport/airport.component";
 import {AirportItemComponent} from "./airport/airport-item/airport-item.component";
 import {ErrorComponent} from "./error/error.component";
+import {UserDetailGuard} from "./user/user-detail.guard";
 
 const appRoutes : Routes = [
   { path: '',               component: HomeComponent },
   { path: 'user',           component: UserComponent },
   { path: 'login',          component: LoginComponent },
   { path: 'register',       component: RegisterComponent },
-  { path: 'account',        component: AccountComponent },
+  { path: 'account',        component: AccountComponent, canActivate: [UserDetailGuard] },
   { path: 'contact',        component: ContactComponent },
   { path: 'about',          component: AboutComponent },
   { path: 'airport',        component: AirportComponent },

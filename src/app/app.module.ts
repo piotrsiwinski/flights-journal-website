@@ -28,6 +28,7 @@ import { AirportItemComponent } from './airport/airport-item/airport-item.compon
 import {AirportService} from "./airport/airport.service";
 import { AirportSearchComponent } from './airport/airport-search/airport-search.component';
 import { ErrorComponent } from './error/error.component';
+import {UserDetailGuard} from "./user/user-detail.guard";
 
 @NgModule({
   declarations: [
@@ -59,7 +60,7 @@ import { ErrorComponent } from './error/error.component';
     RouterModule.forRoot(appRoutes)
 
   ],
-  providers: [AuthService, AirportService],
+  providers: [AuthService, AirportService, UserDetailGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
