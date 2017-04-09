@@ -8,17 +8,19 @@ import {AboutComponent} from "./home/about/about.component";
 import {ContactComponent} from "./home/contact/contact.component";
 import {AirportComponent} from "./airport/airport.component";
 import {AirportItemComponent} from "./airport/airport-item/airport-item.component";
+import {ErrorComponent} from "./error/error.component";
 
 const appRoutes : Routes = [
-  { path: '',             component: HomeComponent },
-  { path: 'user',         component: UserComponent },
-  { path: 'login',        component: LoginComponent },
-  { path: 'register',     component: RegisterComponent },
-  { path: 'account',      component: AccountComponent },
-  { path: 'contact',      component: ContactComponent },
-  { path: 'about',        component: AboutComponent },
-  { path: 'airport',      component: AirportComponent },
+  { path: '',               component: HomeComponent },
+  { path: 'user',           component: UserComponent },
+  { path: 'login',          component: LoginComponent },
+  { path: 'register',       component: RegisterComponent },
+  { path: 'account',        component: AccountComponent },
+  { path: 'contact',        component: ContactComponent },
+  { path: 'about',          component: AboutComponent },
+  { path: 'airport',        component: AirportComponent },
   { path: 'airport/:name',  component: AirportItemComponent },
+  { path: '**',             component: ErrorComponent},
 ];
 
 
