@@ -26,7 +26,6 @@ export class AirportsListComponent implements OnInit {
   onClearClick(){
     this.airports.length = 0;
     this.airports = null;
-
   }
 
 }

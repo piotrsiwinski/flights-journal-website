@@ -14,12 +14,10 @@ export class AuthService {
   LogIn: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private http: Http) {
-    console.log(`auth url: ${this.URL}`);
   }
 
   login(user: User) {
     let token = 'Basic ' + btoa(user.login + ":" + user.password);
-
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', token);
@@ -59,7 +57,7 @@ export class AuthService {
     return Observable.throw(errorsDescription[error.status] || error.toString());
   }
 
-  isAuthenticated(): boolean {
+  isAuthenticated(): Observable<boolean> | boolean {
     return this.AuthToken != null;
   }
 }
