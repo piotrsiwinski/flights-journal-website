@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
+import {FlightService} from "../flight.service";
+import {Flight} from "../../models/flight";
 
 @Component({
   selector: 'app-add-flight',
@@ -7,6 +9,7 @@ import {FormGroup, FormBuilder, Validators} from "@angular/forms";
   styleUrls: ['./add-flight.component.css']
 })
 export class AddFlightComponent implements OnInit {
+  flights;
   form: FormGroup;
   formErrors = {
     'number': '',
@@ -14,11 +17,8 @@ export class AddFlightComponent implements OnInit {
     'destination': '',
     'date': ''
   };
-
   validationMessages = {
-    'number': {
-
-    },
+    'number': {},
     'origin': {
       'required': 'Origin is required.'
     },
@@ -30,13 +30,26 @@ export class AddFlightComponent implements OnInit {
     },
   };
 
-  constructor(private formBuilder: FormBuilder) {
-
+  constructor(private formBuilder: FormBuilder,
+              private flightService: FlightService) {
   }
 
   ngOnInit() {
     this.buildForm();
-    //subscribe to service
+  }
+
+  onSubmit() {
+    this.flightService
+      .getFlightByNumberAndDate(this.form.value)
+      .subscribe(this.handleData, this.handleError);
+  }
+
+  handleData(data: any) {
+    this.flights = data;
+  }
+
+  handleError(error: any) {
+    console.log(JSON.stringify(error));
   }
 
   private buildForm(): void {
@@ -67,9 +80,5 @@ export class AddFlightComponent implements OnInit {
         }
       }
     }
-  }
-
-  onSubmit(){
-    console.log(this.form.value)
   }
 }
