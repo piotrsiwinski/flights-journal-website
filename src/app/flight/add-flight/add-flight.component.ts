@@ -41,7 +41,20 @@ export class AddFlightComponent implements OnInit {
   onSubmit() {
     this.flightService
       .getFlightByNumberAndDate(this.form.value)
-      .subscribe(this.handleData, this.handleError);
+      .subscribe(data => this.handleData(data), this.handleError);
+  }
+
+  onFlightClick(item: any){
+    console.log(JSON.stringify(item));
+    let date: string = item.date.getFullYear() + '-' + item.date.getMonth()+ '-' + item.date.getDay() + ' ' + item.date.getHours() + ':'+item.date.getMinutes();
+
+    let flight = {
+      flightNumber: item.flightNumber,
+      destinationIata: item.destination.iata,
+      originIata: item.origin.iata,
+      dateTime: date
+    };
+    this.flightService.addFlight(flight).subscribe(data => console.log(data), err => console.log(err));
   }
 
   handleData(data: any) {
@@ -51,12 +64,11 @@ export class AddFlightComponent implements OnInit {
   handleError(error: any) {
     console.log(JSON.stringify(error));
   }
-
   private buildForm(): void {
     this.form = this.formBuilder.group({
       number: [''],
-      origin: ['', [Validators.required]],
-      destination: ['', [Validators.required]],
+      origin: ['',],
+      destination: ['', ],
       date: ['', [Validators.required]]
     });
     this.form.valueChanges.subscribe(data => this.onValueChanged(data));

@@ -11,7 +11,7 @@ export class AuthService {
 
   private URL = `${environment.baseApiUrl}`;
   private AuthToken: string;
-  LogIn: EventEmitter<string> = new EventEmitter<string>();
+  Token: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private http: Http) {
   }
@@ -27,7 +27,7 @@ export class AuthService {
       .get(this.URL + '/auth', options)
       .map((response: Response) => {
         this.AuthToken = token;
-        this.LogIn.emit(this.AuthToken);
+        this.Token.emit(this.AuthToken);
         return response.json();
       })
       .catch(this.handleError);
@@ -46,7 +46,7 @@ export class AuthService {
 
   logout() {
     this.AuthToken = null;
-    this.LogIn.emit(this.AuthToken);
+    this.Token.emit(this.AuthToken);
   }
 
   private handleError(error: Response | any) {

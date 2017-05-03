@@ -1,16 +1,20 @@
 import {Injectable} from '@angular/core';
-import {Http, Response} from "@angular/http";
+import {Http, Response, Headers} from "@angular/http";
 import {environment} from "../../environments/environment.prod"
 import {Flight} from "../models/flight";
 import {Observable} from "rxjs";
 import {FlightViewModel} from "../models/flight-view-model";
+import {UserService} from "../user/user.service";
+import {AuthService} from "../core/auth.service";
 
 @Injectable()
 export class FlightService {
 
   private URL: string = environment.baseApiUrl;
+  private token: string;
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private authService: AuthService) {
+    this.authService.Token.subscribe(token => this.token = token);
   }
 
   getFlightByNumberAndDate(flight: Flight): Observable<any> {
@@ -29,6 +33,20 @@ export class FlightService {
       .catch(this.handleError);
   }
 
+  addFlight(flight: any){
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', this.token);
+
+    console.log(`Auth token in flight service ${this.token}`);
+    let body = JSON.stringify(flight);
+
+    console.log(`BODY: ${body}`);
+    return this.http
+      .post(this.URL + '/flight', flight, { withCredentials: true, headers: headers})
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
   private extractData(response: Response): any {
     JSON.stringify(response);
     let body = response.json();
@@ -37,7 +55,7 @@ export class FlightService {
 
   private convertDate(object: any) {
     for (let item of object) {
-      item.date = new Date(item.date[0], item.date[1], item.date[2], item.date[3], item.date[4])
+      item.date = new Date(item.date[0], item.date[1]-1, item.date[2]-1, item.date[3], item.date[4])
     }
 
     return object;

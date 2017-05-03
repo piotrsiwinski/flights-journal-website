@@ -11,7 +11,7 @@ export class UserService {
 
   private AuthToken: string;
 
-  LogIn: EventEmitter<string> = new EventEmitter<string>();
+  Token: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private http: Http) {
   }
@@ -29,7 +29,7 @@ export class UserService {
         if(response.status == 200){
           console.log(`Authenticated: ${JSON.stringify(response, null, 2)}`);
           this.AuthToken = token;
-          this.LogIn.emit(this.AuthToken);
+          this.Token.emit(this.AuthToken);
         }
         return response.json();
       })
@@ -50,7 +50,7 @@ export class UserService {
 
   logout(){
     this.AuthToken = null;
-    this.LogIn.emit(this.AuthToken);
+    this.Token.emit(this.AuthToken);
   }
 
   private handleError(error: Response | any){

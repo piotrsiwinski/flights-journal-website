@@ -84,7 +84,7 @@
                         <td>
                           {{flight.date.toDateString()}} {{flight.date.toLocaleTimeString()}}
                         </td>
-                        <td><button class="txt2 btn">Select</button></td>
+                        <td><button class="txt2 btn" (click)="onFlightClick(flight)">Select</button></td>
 
                         <!--<td><a [routerLink]="['/airport', airport.name]">{{airport.name}}</a></td>-->
                       </tr>
