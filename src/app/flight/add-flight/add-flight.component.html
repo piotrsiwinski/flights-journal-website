@@ -1,0 +1,75 @@
+<div class="inner-page-wrapper">
+  <div class="container">
+    <div class="row">
+
+      <!-- Inner page Wrapper Start -->
+      <div class="inner-page-wrapper form-wrapper">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="row">
+                <div class="col-sm-6 space">
+                  <div [hidden]="userCreated">
+
+                    <div class="form">
+                      <h3>Add flight</h3>
+                      <hr>
+
+                      <form [formGroup]="form" method="post" (ngSubmit)="onSubmit()" class="form-signin">
+
+                        <div class="form-group">
+                          <input formControlName="number" id="number" class="txt" name="origin" placeholder="Flight number"
+                                 type="text">
+                          <span *ngIf="formErrors.number" class="text-danger">
+                            {{formErrors.number}}
+                          </span>
+                        </div>
+
+
+                        <div class="form-group">
+                          <input formControlName="origin" id="origin" class="txt" name="origin" placeholder="Origin"
+                                 type="text">
+                          <span *ngIf="formErrors.origin" class="text-danger">
+                            {{formErrors.origin}}
+                          </span>
+                        </div>
+
+                        <div class="form-group">
+                          <input formControlName="destination" id="destination" class="txt" name="destination"
+                                 placeholder="Destination" type="text">
+                          <span *ngIf="formErrors.destination" class="text-danger">
+                            {{formErrors.destination}}
+                          </span>
+                        </div>
+
+                        <div class="form-group">
+                          <input formControlName="date" id="date" class="txt" name="date" placeholder="date"
+                                 type="date">
+                          <span *ngIf="formErrors.date" class="text-danger">
+                            {{formErrors.date}}
+                          </span>
+                        </div>
+
+
+                        <div class="form-group">
+                          <button [disabled]="!form.valid" name="submit" class="btn txt2" type="submit">
+                            Add flight
+                          </button>
+                        </div>
+
+                      </form>
+                    </div>
+                  </div>
+
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Inner page Wrapper End -->
+    </div>
+  </div>
+</div>

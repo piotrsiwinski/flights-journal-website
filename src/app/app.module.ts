@@ -28,6 +28,7 @@ import {AirportService} from "./airport/airport.service";
 import {AirportSearchComponent} from './airport/airport-search/airport-search.component';
 import {ErrorComponent} from './error/error.component';
 import {UserDetailGuard} from "./user/user-detail.guard";
+import { AddFlightComponent } from './flight/add-flight/add-flight.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import {UserDetailGuard} from "./user/user-detail.guard";
     AirportsListComponent,
     AirportItemComponent,
     AirportSearchComponent,
-    ErrorComponent
+    ErrorComponent,
+    AddFlightComponent
   ],
   imports: [
     BrowserModule,
