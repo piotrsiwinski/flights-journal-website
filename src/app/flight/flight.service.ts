@@ -11,7 +11,6 @@ export class FlightService {
   private URL: string = environment.baseApiUrl;
 
   constructor(private http: Http) {
-
   }
 
   getFlightByNumberAndDate(flight: Flight): Observable<any> {
@@ -36,9 +35,9 @@ export class FlightService {
     return body || {};
   }
 
-  private convertDate(object: any){
-    for(let item of object){
-      item.date = new Date(item.date[0], item.date[1], item.date[2],item.date[3],item.date[4])
+  private convertDate(object: any) {
+    for (let item of object) {
+      item.date = new Date(item.date[0], item.date[1], item.date[2], item.date[3], item.date[4])
     }
 
     return object;

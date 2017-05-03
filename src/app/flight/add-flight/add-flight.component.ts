@@ -81,4 +81,8 @@ export class AddFlightComponent implements OnInit {
       }
     }
   }
+
+  onClearClick(){
+    this.flights= null;
+  }
 }
