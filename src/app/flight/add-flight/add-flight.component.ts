@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {FlightService} from "../flight.service";
-import {Flight} from "../../models/flight";
 import {DateHelper} from "../../utils/date-helpers";
 import {AddFlightModel} from "../../models/add-flight-model";
 
@@ -11,6 +10,7 @@ import {AddFlightModel} from "../../models/add-flight-model";
   styleUrls: ['./add-flight.component.css']
 })
 export class AddFlightComponent implements OnInit {
+  //TODO: Change to strong typed array
   flights;
   form: FormGroup;
   formErrors = {
@@ -32,15 +32,14 @@ export class AddFlightComponent implements OnInit {
     },
   };
 
-  constructor(private formBuilder: FormBuilder,
-              private flightService: FlightService) {
+  constructor(private formBuilder: FormBuilder, private flightService: FlightService) {
   }
 
   ngOnInit() {
     this.buildForm();
   }
 
-  onSubmit() {
+  searchFlightsClick() {
     this.flightService
       .getFlightByNumberAndDate(this.form.value)
       .subscribe(data => this.flights = data, error =>  console.log(JSON.stringify(error)));
@@ -58,6 +57,10 @@ export class AddFlightComponent implements OnInit {
     this.flightService.addFlight(test).subscribe(data => console.log(data), err => console.log(err));
   }
 
+  onClearClick(){
+    this.flights= null;
+  }
+
   private buildForm(): void {
     this.form = this.formBuilder.group({
       number: [''],
@@ -69,7 +72,7 @@ export class AddFlightComponent implements OnInit {
     this.onFormValueChanged();
   }
 
-  onFormValueChanged(data?: any) {
+  private onFormValueChanged(data?: any) {
     if (!this.form) {
       return;
     }
@@ -86,9 +89,5 @@ export class AddFlightComponent implements OnInit {
         }
       }
     }
-  }
-
-  onClearClick(){
-    this.flights= null;
   }
 }

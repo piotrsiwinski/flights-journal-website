@@ -47,8 +47,6 @@ export class AuthService {
       });
   }
 
-
-
   retrieveToken(): AuthTokenModel{
     const tokenString = localStorage.getItem(this.LOCAL_STORAGE_AUTH_TOKEN_KEY);
     const tokenModel: AuthTokenModel = tokenString == null ? null : JSON.parse(tokenString);
@@ -62,8 +60,6 @@ export class AuthService {
   private removeToken(): void {
     localStorage.removeItem(this.LOCAL_STORAGE_AUTH_TOKEN_KEY);
   }
-
-
 
   private handleError(error: Response | any) {
     let errorsDescription = {

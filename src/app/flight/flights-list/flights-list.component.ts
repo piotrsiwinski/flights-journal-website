@@ -7,6 +7,7 @@ import {FlightService} from "../flight.service";
   styleUrls: ['./flights-list.component.css']
 })
 export class FlightsListComponent implements OnInit {
+  //TODO: Change to strong typed array
   flights;
 
   constructor(private flightService: FlightService) { }
