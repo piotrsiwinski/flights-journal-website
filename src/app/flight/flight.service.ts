@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Http, Response, Headers} from "@angular/http";
+import {Http, Response, Headers, RequestOptions} from "@angular/http";
 import {environment} from "../../environments/environment.prod"
 import {Flight} from "../models/flight";
 import {Observable} from "rxjs";
@@ -12,10 +12,10 @@ import {AuthService} from "../auth/auth.service";
 export class FlightService {
 
   private URL: string = environment.baseApiUrl;
-  private token: string;
+
 
   constructor(private http: Http, private authService: AuthService) {
-    this.authService.Token.subscribe(token => this.token = token);
+
   }
 
   getFlightByNumberAndDate(flight: Flight): Observable<any> {
@@ -35,30 +35,20 @@ export class FlightService {
   }
 
   getUserFlights(): Observable<any> {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', this.authService.AuthToken);
+    const headers = new Headers({'Content-Type': 'application/json', 'Authorization': this.authService.retrieveToken().access_token});
+    const options = new RequestOptions({withCredentials: true, headers: headers});
 
-    let url = this.URL + '/flight/all';
-    console.log(`url in service ${url}`);
-
-    console.log(`service get ${JSON.stringify(headers)}`);
-    return this.http.get(url, {withCredentials: true, headers: headers})
+    return this.http.get(`${environment.baseApiUrl}/flight/all`, options)
       .map(this.extractData)
       .catch(this.handleError);
   }
 
   addFlight(flight: any) {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', this.authService.AuthToken);
+    const headers = new Headers({'Content-Type': 'application/json', 'Authorization': this.authService.retrieveToken().access_token});
+    const options = new RequestOptions({withCredentials: true, headers: headers});
 
-    console.log(`Auth token in flight service ${this.authService.AuthToken}`);
-    let body = JSON.stringify(flight);
-
-    console.log(`BODY: ${body}`);
     return this.http
-      .post(this.URL + '/flight', flight, {withCredentials: true, headers: headers})
+      .post(this.URL + '/flight', flight, options)
       .map(this.extractData)
       .catch(this.handleError);
   }

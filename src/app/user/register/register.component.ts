@@ -16,6 +16,64 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   userCreated: Boolean = false;
   errorMessage: string;
+
+  constructor(private authService: AuthService,
+              private formBuilder: FormBuilder) {
+  }
+
+  ngOnInit() {
+    this.buildForm();
+  }
+
+  buildForm(): void {
+    this.registerForm = this.formBuilder.group({
+      email: ['', [Validators.required, CustomValidators.emailValidator]],
+      login: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(6)]]
+    });
+
+    this.registerForm.valueChanges.subscribe(data => this.onFormValueChanged(data));
+    this.onFormValueChanged();
+  }
+
+  onFormValueChanged(data?: any) {
+    if (!this.registerForm) {
+      return;
+    }
+    const form = this.registerForm;
+
+    for (const field in this.formErrors) {
+      // clear previous error message (if any)
+      this.formErrors[field] = '';
+      const control = form.get(field);
+      if (control && control.dirty && !control.valid) {
+        const messages = this.validationMessages[field];
+        for (const key in control.errors) {
+          this.formErrors[field] += messages[key] + ' ';
+        }
+      }
+    }
+  }
+
+  onSubmit() {
+    this.authService.register(this.registerForm.value)
+        .subscribe(()=>{
+          this.errorMessage = null;
+          this.userCreated = true;
+        },
+        error => this.errorMessage = error.toString());
+  }
+
+  onSubmitSuccess = (response: Response) => {
+    this.errorMessage = null;
+    this.userCreated = true;
+  };
+
+  onSubmitError = (err: any) => {
+    this.errorMessage = err.toString();
+  };
+
   formErrors = {
     'email': '',
     'login': '',
@@ -42,58 +100,5 @@ export class RegisterComponent implements OnInit {
       'match': 'Passwords doesn\'t match'
     }
   };
-
-  constructor(private authService: AuthService,
-              private formBuilder: FormBuilder) {
-  }
-
-  ngOnInit() {
-    this.buildForm();
-  }
-
-  buildForm(): void {
-    this.registerForm = this.formBuilder.group({
-      email: ['', [Validators.required, CustomValidators.emailValidator]],
-      login: ['', [Validators.required]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', [Validators.required, Validators.minLength(6)]]
-    });
-
-    this.registerForm.valueChanges.subscribe(data => this.onValueChanged(data));
-    this.onValueChanged();
-  }
-
-  onValueChanged(data?: any) {
-    if (!this.registerForm) {
-      return;
-    }
-    const form = this.registerForm;
-
-    for (const field in this.formErrors) {
-      // clear previous error message (if any)
-      this.formErrors[field] = '';
-      const control = form.get(field);
-      if (control && control.dirty && !control.valid) {
-        const messages = this.validationMessages[field];
-        for (const key in control.errors) {
-          this.formErrors[field] += messages[key] + ' ';
-        }
-      }
-    }
-  }
-
-  onSubmit() {
-    console.log(this.registerForm);
-    this.authService.register(this.registerForm.value).subscribe(this.onSubmitSuccess, this.onSubmitError);
-  }
-
-  onSubmitSuccess = (response: Response) => {
-    this.errorMessage = null;
-    this.userCreated = true;
-  };
-
-  onSubmitError = (err: any) => {
-    this.errorMessage = err.toString();
-  }
 
 }

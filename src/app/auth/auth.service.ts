@@ -7,32 +7,19 @@ import 'rxjs/Rx';
 import {Observable} from "rxjs";
 import {LoginModel} from "../models/login-model";
 import {AuthTokenModel} from "../models/auth-token-model";
+import {RegisterModel} from "../models/register-model";
 
 @Injectable()
 export class AuthService {
   private LOCAL_STORAGE_AUTH_TOKEN_KEY: string= 'auth-token';
-
-  private URL = `${environment.baseApiUrl}`;
-  public AuthToken: string;
-  Token: EventEmitter<string> = new EventEmitter<string>();
-
   constructor(private http: Http) {
   }
 
-  loginOld(user: User) {
-    let token = 'Basic ' + btoa(user.login + ":" + user.password);
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', token);
-    let options = {withCredentials: true, headers: headers};
+  register(user: RegisterModel): Observable<Response>{
+    const body = JSON.stringify(user);
+    const headers = new Headers({'Content-Type': 'application/json'});
 
-    return this.http
-      .get(this.URL + '/auth', options)
-      .map((response: Response) => {
-        this.AuthToken = token;
-        this.Token.emit(this.AuthToken);
-        return response.json();
-      })
+    return this.http.post(`${environment.baseApiUrl}/register`, body, {headers: headers})
       .catch(this.handleError);
   }
 
@@ -43,6 +30,11 @@ export class AuthService {
 
   logout(): void{
     this.removeToken();
+  }
+
+  isLoggedIn(): boolean{
+    const token: AuthTokenModel = this.retrieveToken();
+    return token !== null;
   }
 
   private getToken(user: LoginModel): Observable<Response>{
@@ -56,40 +48,23 @@ export class AuthService {
       });
   }
 
-  private storeToken(token: AuthTokenModel): void{
-    localStorage.setItem(this.LOCAL_STORAGE_AUTH_TOKEN_KEY, JSON.stringify(token));
-  }
 
-  private retrieveToken(): AuthTokenModel{
+
+  retrieveToken(): AuthTokenModel{
     const tokenString = localStorage.getItem(this.LOCAL_STORAGE_AUTH_TOKEN_KEY);
     const tokenModel: AuthTokenModel = tokenString == null ? null : JSON.parse(tokenString);
     return tokenModel;
+  }
+
+  private storeToken(token: AuthTokenModel): void{
+    localStorage.setItem(this.LOCAL_STORAGE_AUTH_TOKEN_KEY, JSON.stringify(token));
   }
 
   private removeToken(): void {
     localStorage.removeItem(this.LOCAL_STORAGE_AUTH_TOKEN_KEY);
   }
 
-  public isLoggedIn(): boolean{
-    const token: AuthTokenModel = this.retrieveToken();
-    return token !== null;
-  }
 
-  register(user: User) {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    const body = JSON.stringify(user);
-
-    return this.http
-      .post(this.URL + '/register', body, {headers: headers})
-      .map((response: Response) => response.json())
-      .catch(this.handleError);
-  }
-
-  logoutOld() {
-    this.AuthToken = null;
-    this.Token.emit(this.AuthToken);
-  }
 
   private handleError(error: Response | any) {
     let errorsDescription = {
@@ -97,9 +72,5 @@ export class AuthService {
       409: 'User with this login already exists'
     };
     return Observable.throw(errorsDescription[error.status] || error.toString());
-  }
-
-  isAuthenticated(): Observable<boolean> | boolean {
-    return this.AuthToken != null;
   }
 }
