@@ -28,4 +28,12 @@ export class DateHelper{
     let result: string = year + '-' + month + '-' + day + ' ' + hour + ':' + minutes;
     return result;
   }
+
+  public static convertDate(object: any) {
+    for (let item of object) {
+      item.date = new Date(item.date[0], item.date[1] - 1, item.date[2] - 1, item.date[3], item.date[4])
+    }
+
+    return object;
+  }
 }

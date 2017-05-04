@@ -2,7 +2,6 @@ import {environment} from './../../environments/environment.prod';
 
 import {Injectable, EventEmitter} from '@angular/core';
 import {Http, Headers, Response, RequestOptions} from "@angular/http";
-import {User} from "../models/user";
 import 'rxjs/Rx';
 import {Observable} from "rxjs";
 import {LoginModel} from "../models/login-model";

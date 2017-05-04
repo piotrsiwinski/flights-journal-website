@@ -3,9 +3,10 @@ import {Http, Response, Headers, RequestOptions} from "@angular/http";
 import {environment} from "../../environments/environment.prod"
 import {Flight} from "../models/flight";
 import {Observable} from "rxjs";
-import {FlightViewModel} from "../models/flight-view-model";
-import {UserService} from "../user/user.service";
 import {AuthService} from "../auth/auth.service";
+import {FlightModel} from "../models/flight-model";
+import {DateHelper} from "../utils/date-helpers";
+import {AddFlightModel} from "../models/add-flight-model";
 
 
 @Injectable()
@@ -18,8 +19,8 @@ export class FlightService {
 
   }
 
-  getFlightByNumberAndDate(flight: Flight): Observable<any> {
-    let date = flight.date.toString().split('-');
+  getFlightByNumberAndDate(flight: FlightModel): Observable<any> {
+    let date = flight.date.split('-');
     let year = date[0];
     let month = date[1];
     let day = date[2];
@@ -30,7 +31,7 @@ export class FlightService {
     return this.http
       .get(url)
       .map(this.extractData)
-      .map(this.convertDate)
+      .map(DateHelper.convertDate)
       .catch(this.handleError);
   }
 
@@ -43,12 +44,12 @@ export class FlightService {
       .catch(this.handleError);
   }
 
-  addFlight(flight: any) {
+  addFlight(flight: AddFlightModel) {
     const headers = new Headers({'Content-Type': 'application/json', 'Authorization': this.authService.retrieveToken().access_token});
     const options = new RequestOptions({withCredentials: true, headers: headers});
+    const body = JSON.stringify(flight);
 
-    return this.http
-      .post(this.URL + '/flight', flight, options)
+    return this.http.post(this.URL + '/flight', body, options)
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -58,15 +59,6 @@ export class FlightService {
     let body = response.json();
     return body || {};
   }
-
-  private convertDate(object: any) {
-    for (let item of object) {
-      item.date = new Date(item.date[0], item.date[1] - 1, item.date[2] - 1, item.date[3], item.date[4])
-    }
-
-    return object;
-  }
-
   private handleError(error: Response | any) {
     let errorMessage: string;
     if (error instanceof Response) {

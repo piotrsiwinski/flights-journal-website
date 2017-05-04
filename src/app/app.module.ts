@@ -23,10 +23,9 @@ import {AirportItemComponent} from './airport/airport-item/airport-item.componen
 import {AirportService} from "./airport/airport.service";
 import {AirportSearchComponent} from './airport/airport-search/airport-search.component';
 import {ErrorComponent} from './error/error.component';
-import {UserDetailGuard} from "./user/user-detail.guard";
+import {AuthenticationGuard} from "./auth/auth-guard";
 import {AddFlightComponent} from './flight/add-flight/add-flight.component';
 import {FlightService} from "./flight/flight.service";
-import {UserService} from "./user/user.service";
 import {AuthService} from "./auth/auth.service";
 
 @NgModule({
@@ -58,7 +57,7 @@ import {AuthService} from "./auth/auth.service";
     HttpModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [AuthService, AirportService, UserDetailGuard, FlightService, UserService],
+  providers: [AuthService, AirportService, AuthenticationGuard, FlightService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

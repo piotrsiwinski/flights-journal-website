@@ -3,6 +3,7 @@ import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {FlightService} from "../flight.service";
 import {Flight} from "../../models/flight";
 import {DateHelper} from "../../utils/date-helpers";
+import {AddFlightModel} from "../../models/add-flight-model";
 
 @Component({
   selector: 'app-add-flight',
@@ -42,28 +43,21 @@ export class AddFlightComponent implements OnInit {
   onSubmit() {
     this.flightService
       .getFlightByNumberAndDate(this.form.value)
-      .subscribe(data => this.handleData(data), this.handleError);
+      .subscribe(data => this.flights = data, error =>  console.log(JSON.stringify(error)));
   }
 
   onFlightClick(item: any){
     console.log(JSON.stringify(item));
 
-    let flight = {
+    let test: AddFlightModel = {
       flightNumber: item.flightNumber,
       destinationIata: item.destination.iata,
       originIata: item.origin.iata,
       dateTime: DateHelper.convertToDate(item.date)
     };
-    this.flightService.addFlight(flight).subscribe(data => console.log(data), err => console.log(err));
+    this.flightService.addFlight(test).subscribe(data => console.log(data), err => console.log(err));
   }
 
-  handleData(data: any) {
-    this.flights = data;
-  }
-
-  handleError(error: any) {
-    console.log(JSON.stringify(error));
-  }
   private buildForm(): void {
     this.form = this.formBuilder.group({
       number: [''],
@@ -71,11 +65,11 @@ export class AddFlightComponent implements OnInit {
       destination: ['', ],
       date: ['', [Validators.required]]
     });
-    this.form.valueChanges.subscribe(data => this.onValueChanged(data));
-    this.onValueChanged();
+    this.form.valueChanges.subscribe(data => this.onFormValueChanged(data));
+    this.onFormValueChanged();
   }
 
-  onValueChanged(data?: any) {
+  onFormValueChanged(data?: any) {
     if (!this.form) {
       return;
     }

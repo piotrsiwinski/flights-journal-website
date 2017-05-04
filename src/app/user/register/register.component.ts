@@ -1,8 +1,5 @@
-import {Component, OnInit, AfterViewChecked} from '@angular/core';
-import {User} from "../../models/user";
-import {UserService} from "../user.service";
-import {Router} from "@angular/router";
-import {FormGroup, FormBuilder, Validators, FormControl} from "@angular/forms";
+import {Component, OnInit, } from '@angular/core';
+import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {Response} from "@angular/http";
 import {CustomValidators} from "../../utils/custom-validators";
 import {AuthService} from "../../auth/auth.service";
