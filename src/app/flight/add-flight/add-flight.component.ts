@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {FlightService} from "../flight.service";
 import {Flight} from "../../models/flight";
+import {DateHelper} from "../../utils/date-helpers";
 
 @Component({
   selector: 'app-add-flight',
@@ -46,13 +47,12 @@ export class AddFlightComponent implements OnInit {
 
   onFlightClick(item: any){
     console.log(JSON.stringify(item));
-    let date: string = item.date.getFullYear() + '-' + item.date.getMonth()+ '-' + item.date.getDay() + ' ' + item.date.getHours() + ':'+item.date.getMinutes();
 
     let flight = {
       flightNumber: item.flightNumber,
       destinationIata: item.destination.iata,
       originIata: item.origin.iata,
-      dateTime: date
+      dateTime: DateHelper.convertToDate(item.date)
     };
     this.flightService.addFlight(flight).subscribe(data => console.log(data), err => console.log(err));
   }
