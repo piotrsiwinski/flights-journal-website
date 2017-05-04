@@ -11,6 +11,7 @@ import {AirportItemComponent} from "./airport/airport-item/airport-item.componen
 import {ErrorComponent} from "./error/error.component";
 import {UserDetailGuard} from "./user/user-detail.guard";
 import {AddFlightComponent} from "./flight/add-flight/add-flight.component";
+import {FlightsListComponent} from "./flight/flights-list/flights-list.component";
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -22,6 +23,7 @@ const appRoutes: Routes = [
   {path: 'about', component: AboutComponent},
   {path: 'airport', component: AirportComponent},
   {path: 'airport/:name', component: AirportItemComponent},
+  {path: 'flight', component: FlightsListComponent},
   {path: 'flight/add', component: AddFlightComponent},
   {path: '**', component: ErrorComponent},
 ];

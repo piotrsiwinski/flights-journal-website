@@ -33,7 +33,18 @@ export class FlightService {
       .catch(this.handleError);
   }
 
-  addFlight(flight: any){
+  getUserFlights(): Observable<any> {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', this.token);
+
+    console.log(`service get ${JSON.stringify(headers)}`);
+    return this.http.get(this.URL + '/flight/all', {withCredentials: true, headers: headers})
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  addFlight(flight: any) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', this.token);
@@ -43,10 +54,11 @@ export class FlightService {
 
     console.log(`BODY: ${body}`);
     return this.http
-      .post(this.URL + '/flight', flight, { withCredentials: true, headers: headers})
+      .post(this.URL + '/flight', flight, {withCredentials: true, headers: headers})
       .map(this.extractData)
       .catch(this.handleError);
   }
+
   private extractData(response: Response): any {
     JSON.stringify(response);
     let body = response.json();
@@ -55,7 +67,7 @@ export class FlightService {
 
   private convertDate(object: any) {
     for (let item of object) {
-      item.date = new Date(item.date[0], item.date[1]-1, item.date[2]-1, item.date[3], item.date[4])
+      item.date = new Date(item.date[0], item.date[1] - 1, item.date[2] - 1, item.date[3], item.date[4])
     }
 
     return object;
