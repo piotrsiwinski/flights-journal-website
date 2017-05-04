@@ -1,7 +1,8 @@
-import { Component, OnInit }  from '@angular/core';
-import { Router }             from "@angular/router";
-import {AuthService} from "../../core/auth.service";
+import {Component, OnInit}  from '@angular/core';
+import {Router}             from "@angular/router";
+
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
+import {AuthService} from "../../auth/auth.service";
 
 @Component({
   selector: 'app-login',
@@ -13,11 +14,10 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   errorMessage: string;
 
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-    private forumBuilder: FormBuilder
-  ) {}
+  constructor(private authService: AuthService,
+              private router: Router,
+              private forumBuilder: FormBuilder) {
+  }
 
   ngOnInit() {
     this.loginForm = this.forumBuilder.group({
@@ -26,16 +26,13 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  onSubmit(){
-    console.log(this.loginForm.value);
-    this.authService.login(this.loginForm.value).subscribe(this.onSubmitSuccess, this.onSubmitError);
-  }
-
-  onSubmitSuccess = () =>{
-    this.router.navigate(['/'])
-  };
-
-  onSubmitError = (err: any) => {
-    this.errorMessage = err.toString();
+  onSubmit() {
+    //console.log(this.loginForm.value);
+    //this.authService.login(this.loginForm.value).subscribe(this.onSubmitSuccess, this.onSubmitError);
+    this.authService.login(this.loginForm.value)
+      .subscribe(() => {
+        this.router.navigate(['/'])
+      },
+      error => this.errorMessage = error.toString());
   }
 }

@@ -1,28 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, OnChanges, SimpleChanges, DoCheck} from '@angular/core';
 import {Router} from "@angular/router";
-import {AuthService} from "../../core/auth.service";
+import {AuthService} from "../../auth/auth.service";
 
 @Component({
   selector: 'app-header',
   templateUrl: 'header.component.html',
   styleUrls: ['header.component.css']
 })
-export class HeaderComponent implements OnInit {
-
+export class HeaderComponent implements OnInit, DoCheck {
   isLoggedIn: boolean = false;
-
   constructor(private authService: AuthService, private router: Router) {
-
   }
 
   ngOnInit() {
-    this.authService.Token.subscribe((token: string) => {
-      console.log(token);
-      this.isLoggedIn = token !== null;
-    });
+    this.isUserLoggedIn();
   }
-  onLogoutClick(){
+
+  ngDoCheck(): void {
+    this.ngOnInit();
+  }
+
+  private isUserLoggedIn() {
+    this.isLoggedIn = this.authService.isLoggedIn();
+  }
+
+  onLogoutClick() {
     this.authService.logout();
+    this.router.navigate(['/']);
   }
 
 }

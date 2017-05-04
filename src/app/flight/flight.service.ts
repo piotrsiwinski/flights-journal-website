@@ -5,7 +5,8 @@ import {Flight} from "../models/flight";
 import {Observable} from "rxjs";
 import {FlightViewModel} from "../models/flight-view-model";
 import {UserService} from "../user/user.service";
-import {AuthService} from "../core/auth.service";
+import {AuthService} from "../auth/auth.service";
+
 
 @Injectable()
 export class FlightService {
@@ -36,10 +37,13 @@ export class FlightService {
   getUserFlights(): Observable<any> {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', this.token);
+    headers.append('Authorization', this.authService.AuthToken);
+
+    let url = this.URL + '/flight/all';
+    console.log(`url in service ${url}`);
 
     console.log(`service get ${JSON.stringify(headers)}`);
-    return this.http.get(this.URL + '/flight/all', {withCredentials: true, headers: headers})
+    return this.http.get(url, {withCredentials: true, headers: headers})
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -47,9 +51,9 @@ export class FlightService {
   addFlight(flight: any) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', this.token);
+    headers.append('Authorization', this.authService.AuthToken);
 
-    console.log(`Auth token in flight service ${this.token}`);
+    console.log(`Auth token in flight service ${this.authService.AuthToken}`);
     let body = JSON.stringify(flight);
 
     console.log(`BODY: ${body}`);

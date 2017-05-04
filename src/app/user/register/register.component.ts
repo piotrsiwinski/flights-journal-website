@@ -2,10 +2,10 @@ import {Component, OnInit, AfterViewChecked} from '@angular/core';
 import {User} from "../../models/user";
 import {UserService} from "../user.service";
 import {Router} from "@angular/router";
-import {AuthService} from "../../core/auth.service";
 import {FormGroup, FormBuilder, Validators, FormControl} from "@angular/forms";
 import {Response} from "@angular/http";
 import {CustomValidators} from "../../utils/custom-validators";
+import {AuthService} from "../../auth/auth.service";
 
 @Component({
   selector: 'app-register',
@@ -32,21 +32,20 @@ export class RegisterComponent implements OnInit {
       'required': 'Login is required',
       'minlength': 'Login must be 5 characters long'
     },
-    'password':{
+    'password': {
       'required': 'Password is required',
       'minlength': 'Password must be 6 characters long',
     },
-    'confirmPassword':{
+    'confirmPassword': {
       'required': 'Password is required',
       'minlength': 'Password must be 6 characters long',
       'match': 'Passwords doesn\'t match'
     }
   };
 
-  constructor(
-    private authService: AuthService,
-    private formBuilder: FormBuilder
-  ){}
+  constructor(private authService: AuthService,
+              private formBuilder: FormBuilder) {
+  }
 
   ngOnInit() {
     this.buildForm();
@@ -88,9 +87,9 @@ export class RegisterComponent implements OnInit {
     this.authService.register(this.registerForm.value).subscribe(this.onSubmitSuccess, this.onSubmitError);
   }
 
-  onSubmitSuccess = (response: Response) =>{
-      this.errorMessage = null;
-      this.userCreated = true;
+  onSubmitSuccess = (response: Response) => {
+    this.errorMessage = null;
+    this.userCreated = true;
   };
 
   onSubmitError = (err: any) => {
