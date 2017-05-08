@@ -1,21 +1,16 @@
-import {Component, OnInit} from '@angular/core';
-import {FormGroup, FormBuilder, Validators} from "@angular/forms";
+import { Component, OnInit } from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {FlightService} from "../flight.service";
-import {DateHelper} from "../../utils/date-helpers";
-import {AddFlightModel} from "../../models/add-flight-model";
 
 @Component({
-  selector: 'app-add-flight',
-  templateUrl: './add-flight.component.html',
-  styleUrls: ['./add-flight.component.css']
+  selector: 'app-search-flight',
+  templateUrl: './search-flight.component.html',
+  styleUrls: ['./search-flight.component.css']
 })
-export class AddFlightComponent implements OnInit {
+export class SearchFlightComponent implements OnInit {
+
   //TODO: Change to strong typed array
   flights;
-  searchErrorMessage: string;
-
-  addSuccess: boolean;
-  addErrorMessage: string;
   form: FormGroup;
   formErrors = {
     'number': '',
@@ -36,7 +31,6 @@ export class AddFlightComponent implements OnInit {
     },
   };
 
-
   constructor(private formBuilder: FormBuilder, private flightService: FlightService) {
   }
 
@@ -45,52 +39,16 @@ export class AddFlightComponent implements OnInit {
   }
 
   searchFlightsClick() {
-    let formData = this.form.value;
-
-    if(!formData.number && !formData.origin && !formData.destination){
-      this.searchErrorMessage = 'Flight number or Origin and Destination has to be filled';
-      return;
-    }
     this.flightService
       .getFlightByNumberAndDate(this.form.value)
-      .subscribe(data => {
-          this.flights = data;
-        }
-        , error => {
-          this.searchErrorMessage = 'Not found.' + error.toString();
-        }
-      );
-  }
-
-  onFlightClick(item: any) {
-    console.log(JSON.stringify(item));
-
-    let test: AddFlightModel = {
-      flightNumber: item.flightNumber,
-      destinationIata: item.destination.iata,
-      originIata: item.origin.iata,
-      dateTime: DateHelper.convertToDate(item.date)
-    };
-    this.flightService.addFlight(test).subscribe(data => {
-        this.flights = data;
-        this.addSuccess = true;
-      }
-      , error => {
-        this.addSuccess = false;
-        this.addErrorMessage = 'This flight is already added';
-      }
-    );
-  }
-
-  onClearClick() {
-    this.flights = null;
+      .subscribe(data => this.flights = data, error =>  console.log(JSON.stringify(error)));
   }
 
   private buildForm(): void {
     this.form = this.formBuilder.group({
       number: [''],
       origin: ['',],
-      destination: ['',],
+      destination: ['', ],
       date: ['', [Validators.required]]
     });
     this.form.valueChanges.subscribe(data => this.onFormValueChanged(data));
@@ -102,7 +60,6 @@ export class AddFlightComponent implements OnInit {
       return;
     }
     const form = this.form;
-
 
     for (const field in this.formErrors) {
       // clear previous error message (if any)

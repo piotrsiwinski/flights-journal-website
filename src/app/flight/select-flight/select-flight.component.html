@@ -1,0 +1,12 @@
+<tr>
+  <td>{{flight.flightNumber}}</td>
+  <td>{{flight.destination.name}}</td>
+  <td>{{flight.origin.name}}</td>
+  <td>
+    {{flight.date.toDateString()}} {{flight.date.toLocaleTimeString()}}
+  </td>
+  <td>
+    <button class="txt2 btn" (click)="onFlightClick(flight)">Select</button>
+  </td>
+
+</tr>

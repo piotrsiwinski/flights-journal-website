@@ -61,8 +61,10 @@
                   </div>
 
 
-                  <div *ngIf="flights && flights.length==0">
-                    <span>Not found</span>
+                  <div *ngIf="flights && flights.length==0 || searchErrorMessage">
+                    <div class="alert alert-danger">
+                      {{searchErrorMessage}}
+                    </div>
                   </div>
 
                   <div *ngIf="flights && flights.length>0">
@@ -90,6 +92,12 @@
                       </tr>
                       </tbody>
                     </table>
+                    <div *ngIf="!addSuccess && addErrorMessage">
+                      <div class="alert alert-danger">
+                        Can't add flight. {{addErrorMessage}}
+                      </div>
+                    </div>
+
                     <button class="btn txt2" (click)="onClearClick()">Clear</button>
 
                   </div>
