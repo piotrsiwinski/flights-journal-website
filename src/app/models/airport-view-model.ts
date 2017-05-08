@@ -6,4 +6,7 @@ export class AirportViewModel{
   id: number;
   name: string;
   iata: string;
+  latitude? :string;
+  longitude? :string;
+
 }

@@ -25,7 +25,7 @@ export class AirportService {
                     .catch(this.handleError);
   }
 
-  getAirports(name: string) : Observable<AirportViewModel[]>{
+  getAirports(name: string) : Observable<any>{
     return this.http.get(this.URL + `/airport/${name}`)
                     .map(this.extractData)
                     .catch(this.handleError);

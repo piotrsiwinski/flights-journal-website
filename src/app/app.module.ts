@@ -1,4 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
+import {AgmCoreModule} from 'angular2-google-maps/core';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
@@ -59,7 +60,10 @@ import { FlightDetailsComponent } from './flight/flight-details/flight-details.c
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCnBZXxvMUxDvps9dbEV1TWEg_SQPPZ_SQ'
+    })
   ],
   providers: [AuthService, AirportService, AuthenticationGuard, FlightService],
   bootstrap: [AppComponent]
