@@ -12,6 +12,7 @@ import {ErrorComponent} from "./error/error.component";
 import {AuthenticationGuard} from "./auth/auth-guard";
 import {AddFlightComponent} from "./flight/add-flight/add-flight.component";
 import {FlightsListComponent} from "./flight/flights-list/flights-list.component";
+import {UserFlightsComponent} from "./flight/user-flights/user-flights.component";
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -23,7 +24,7 @@ const appRoutes: Routes = [
   {path: 'about', component: AboutComponent},
   {path: 'airport', component: AirportComponent},
   {path: 'airport/:name', component: AirportItemComponent},
-  {path: 'flight', component: FlightsListComponent, canActivate: [AuthenticationGuard]},
+  {path: 'flight', component: UserFlightsComponent, canActivate: [AuthenticationGuard]},
   {path: 'flight/add', component: AddFlightComponent},
   {path: '**', component: ErrorComponent},
 ];

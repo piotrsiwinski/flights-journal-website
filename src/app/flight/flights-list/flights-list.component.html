@@ -1,51 +1,35 @@
-<div class="inner-page-wrapper">
-  <div class="container">
-    <div class="row">
-
-      <!-- Inner page Wrapper Start -->
-      <div class="inner-page-wrapper form-wrapper">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="row">
-                <div class="col-sm-6 space">
-
-                  <div *ngIf="flights && flights.length == 0">
-                    <p>You have no flights. Click <span><a routerLink="/flight/add"> here</a> </span>to add</p>
-                  </div>
-
-                  <div *ngIf="flights && flights.length>0">
-                    <h2><span>Your flights</span></h2>
-                    <table class="table table-bordered table-stripped">
-                      <thead>
-                      <tr>
-                        <th>Flight number</th>
-                        <th>Origin</th>
-                        <th>Destination</th>
-                        <th>Full date</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                      <tr *ngFor="let flight of flights">
-                        <td>{{flight.flightNumber}}</td>
-                        <td>{{flight.destination.name}}</td>
-                        <td>{{flight.origin.name}}</td>
-                        <td>
-                          {{flight.date.toDateString()}} {{flight.date.toLocaleTimeString()}}
-                        </td>
-                      </tr>
-                      </tbody>
-                    </table>
-
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Inner page Wrapper End -->
-    </div>
-  </div>
+<div *ngIf="flights && flights.length == 0">
+  <p>You have no flights. Click <span><a routerLink="/flight/add"> here</a> </span>to add</p>
 </div>
+
+<div *ngIf="flights && flights.length>0">
+  <h2><span>Your flights</span></h2>
+  <table class="table table-bordered table-stripped">
+    <thead>
+    <tr>
+      <th>Flight number</th>
+      <th>Origin</th>
+      <th>Destination</th>
+      <th>Full date</th>
+      <th>Operations</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let flight of flights">
+      <td>{{flight.flightNumber}}</td>
+      <td>{{flight.destination.name}}</td>
+      <td>{{flight.origin.name}}</td>
+      <td>
+        {{flight.date.toDateString()}} {{flight.date.toLocaleTimeString()}}
+      </td>
+      <td>
+        <button class="txt2 btn" (click)="onClick(flight)">Display info</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+
+
+

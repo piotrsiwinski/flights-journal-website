@@ -27,6 +27,8 @@ import {AuthenticationGuard} from "./auth/auth-guard";
 import {AddFlightComponent} from './flight/add-flight/add-flight.component';
 import {FlightService} from "./flight/flight.service";
 import {AuthService} from "./auth/auth.service";
+import { UserFlightsComponent } from './flight/user-flights/user-flights.component';
+import { FlightDetailsComponent } from './flight/flight-details/flight-details.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import {AuthService} from "./auth/auth.service";
     AirportItemComponent,
     AirportSearchComponent,
     ErrorComponent,
-    AddFlightComponent
+    AddFlightComponent,
+    UserFlightsComponent,
+    FlightDetailsComponent
   ],
   imports: [
     BrowserModule,

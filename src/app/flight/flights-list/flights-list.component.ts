@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {FlightService} from "../flight.service";
 
 @Component({
@@ -10,6 +10,8 @@ export class FlightsListComponent implements OnInit {
   //TODO: Change to strong typed array
   flights;
 
+  @Output() flightSelected = new EventEmitter<any>();
+
   constructor(private flightService: FlightService) { }
 
   ngOnInit() {
@@ -20,4 +22,7 @@ export class FlightsListComponent implements OnInit {
     });
   }
 
+  onClick(flight){
+    this.flightSelected.emit(flight);
+  }
 }
