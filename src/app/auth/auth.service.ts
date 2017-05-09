@@ -29,6 +29,7 @@ export class AuthService {
 
   logout(): void{
     this.removeToken();
+    this.http.get(`${environment.baseApiUrl}/auth/logout`).subscribe();
   }
 
   isLoggedIn(): boolean{
@@ -44,7 +45,8 @@ export class AuthService {
     return this.http.get(`${environment.baseApiUrl}/auth`, options)
       .do(() =>{
         this.storeToken(token)
-      });
+      })
+      .catch(this.handleError);
   }
 
   retrieveToken(): AuthTokenModel{
