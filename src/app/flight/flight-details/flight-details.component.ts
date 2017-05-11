@@ -20,7 +20,7 @@ export class FlightDetailsComponent implements OnInit, OnChanges {
 
   // initial center position for the map
   lat: number = 51.469603;
-  lng: number = 6.00;
+  lng: any = 6.00;
 
   markers: marker[] = [];
 
@@ -36,24 +36,29 @@ export class FlightDetailsComponent implements OnInit, OnChanges {
     if (!this.flight) {
       return;
     }
+    let destinationLongitude;
+    let originLongitude;
     //get and display on map dst and origin airports
     this.airportService.getAirports(this.flight.destination.name).subscribe(data => {
       this.markers = [];
       let airport: any = data[0];
+      destinationLongitude = airport.latitude;
 
       this.markers.push({
         label: airport.name,
-        lat: airport.latitude | 51.469603,
-        lng: airport.longitude | -0.453566
+        lat: airport.latitude,
+        lng: airport.longitude
       });
 
       this.airportService.getAirports(this.flight.origin.name).subscribe(data => {
         let airport: any = data[0];
+        originLongitude = airport.latitude;
+        let mean: any = (destinationLongitude + originLongitude)/2;
 
         this.markers.push({
           label: airport.name,
-          lat: airport.latitude | 54.339722,
-          lng: airport.longitude | 12.711667
+          lat: airport.latitude,
+          lng: airport.longitude
         });
       })
     })

@@ -26,7 +26,7 @@ export class AirportService {
   }
 
   getAirports(name: string) : Observable<any>{
-    return this.http.get(this.URL + `/airport/${name}`)
+    return this.http.get(this.URL + `/airport/${name}/details`)
                     .map(this.extractData)
                     .catch(this.handleError);
   }
