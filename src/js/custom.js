@@ -61,4 +61,15 @@
         animation: 'fade'
     });
 
+    $('document').ready(function(){
+      var token = localStorage.getItem('auth-token');
+      if(token){
+        console.log('Zalogowany');
+        $("#loggedOut").hide();
+      }else{
+        $("#loggedIn").hide();
+
+      }
+    });
+
 })(jQuery);
