@@ -72,6 +72,17 @@ export class FlightService {
       .catch(this.handleError);
   }
 
+  deleteUserFlight(id) {
+    const headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': this.authService.retrieveToken().access_token
+    });
+    const options = new RequestOptions({withCredentials: true, headers: headers});
+    return this.http.delete(`${environment.baseApiUrl}/flight/${id}`, options)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
   private extractData(response: Response): any {
     JSON.stringify(response);
     let body = response.json();

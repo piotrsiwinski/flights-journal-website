@@ -12,17 +12,34 @@ export class FlightsListComponent implements OnInit {
 
   @Output() flightSelected = new EventEmitter<any>();
 
-  constructor(private flightService: FlightService) { }
+  constructor(private flightService: FlightService) {
+  }
 
   ngOnInit() {
-    this.flightService.getUserFlights().subscribe(data =>
-    {
+    this.initialize();
+  }
+
+  private initialize = () => {
+    this.flightService.getUserFlights().subscribe(data => {
       console.log(data);
       this.flights = data;
     });
   }
 
-  onClick(flight){
+  onClick(flight) {
     this.flightSelected.emit(flight);
+  }
+
+  onDeleteClick(flight) {
+    console.log(JSON.stringify(flight, null, 2));
+    this.flightService.deleteUserFlight(flight.id).subscribe(this.handleDeleteResponse, this.handleError);
+  }
+
+  private handleDeleteResponse = () => {
+    this.ngOnInit();
+  }
+
+  private handleError = (err) => {
+    console.log(JSON.stringify(err, null, 2));
   }
 }

@@ -1,15 +1,7 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {AirportService} from "../../airport/airport.service";
-import {FlightService} from "../flight.service";
-import {GoogleMapsModel} from "../../models/google-maps-model";
-
-//
-// interface marker {
-//   lat: number;
-//   lng: number;
-//   label?: string;
-//   draggable?: boolean;
-// }
+import {AirportService} from '../../airport/airport.service';
+import {FlightService} from '../flight.service';
+import {GoogleMapsModel} from '../../models/google-maps-model';
 
 @Component({
   selector: 'app-flight-details',
