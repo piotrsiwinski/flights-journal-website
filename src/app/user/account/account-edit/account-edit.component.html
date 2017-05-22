@@ -1,0 +1,45 @@
+<div class="inner-page-wrapper">
+  <div class="container">
+    <div class="row">
+      <!-- Inner page Wrapper Start -->
+      <div class="inner-page-wrapper form-wrapper">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="row">
+                <div class="col-sm-6 space">
+                  <h3>Edit account details</h3>
+                  <hr>
+                  <div *ngIf="errorMessage">
+                    <span class="text-danger"> <strong>Error occured</strong>
+                      <p>{{errorMessage}}</p>
+                    </span>
+                  </div>
+
+                  <form [formGroup]="editForm" method="post" (ngSubmit)="onSubmit()">
+                    <div class="form-group">
+                      <input formControlName="firstName" type="text" id="firstName" class="txt" placeholder="FirstName">
+                    </div>
+
+                    <div class="form-group">
+                      <input formControlName="lastName" type="text" id="lastName" class="txt" placeholder="Last Name">
+                    </div>
+
+                    <div class="form-group">
+                      <input formControlName="age" type="text" id="age" class="txt" placeholder="Age">
+                    </div>
+
+                    <div class="form-group">
+                      <button type="submit" class="btn txt2">Save</button>
+                    </div>
+
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Inner page Wrapper End -->
+      </div>
+    </div>
+  </div>

@@ -30,6 +30,7 @@ import {FlightService} from "./flight/flight.service";
 import {AuthService} from "./auth/auth.service";
 import { UserFlightsComponent } from './flight/user-flights/user-flights.component';
 import { FlightDetailsComponent } from './flight/flight-details/flight-details.component';
+import { AccountEditComponent } from './user/account/account-edit/account-edit.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { FlightDetailsComponent } from './flight/flight-details/flight-details.c
     ErrorComponent,
     AddFlightComponent,
     UserFlightsComponent,
-    FlightDetailsComponent
+    FlightDetailsComponent,
+    AccountEditComponent
   ],
   imports: [
     BrowserModule,

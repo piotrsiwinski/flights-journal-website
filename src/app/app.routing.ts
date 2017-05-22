@@ -13,6 +13,7 @@ import {AuthenticationGuard} from "./auth/auth-guard";
 import {AddFlightComponent} from "./flight/add-flight/add-flight.component";
 import {FlightsListComponent} from "./flight/flights-list/flights-list.component";
 import {UserFlightsComponent} from "./flight/user-flights/user-flights.component";
+import {AccountEditComponent} from "./user/account/account-edit/account-edit.component";
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -20,6 +21,7 @@ const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'account', component: AccountComponent, canActivate: [AuthenticationGuard]},
+  {path: 'account/edit', component: AccountEditComponent, canActivate: [AuthenticationGuard]},
   {path: 'contact', component: ContactComponent},
   {path: 'about', component: AboutComponent},
   {path: 'airport', component: AirportComponent},

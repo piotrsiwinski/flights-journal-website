@@ -6,15 +6,41 @@ import 'rxjs/Rx';
 import {Observable} from "rxjs";
 import {LoginModel} from "../models/login-model";
 import {AuthTokenModel} from "../models/auth-token-model";
-import {RegisterModel} from "../models/register-model";
+import {RegisterModel} from '../models/register-model';
 
 @Injectable()
 export class AuthService {
-  private LOCAL_STORAGE_AUTH_TOKEN_KEY: string= 'auth-token';
+  private LOCAL_STORAGE_AUTH_TOKEN_KEY = 'auth-token';
+
   constructor(private http: Http) {
   }
 
-  register(user: RegisterModel): Observable<Response>{
+  getUserDetails() {
+    const headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': 'Basic dGVzdDEyMzEyM0B3cC5wbDpQQHNzdzByZA=='
+    });
+    const options = new RequestOptions({withCredentials: true, headers: headers});
+
+    return this.http.get(`${environment.baseApiUrl}/details`, options)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  saveUserDetails(user) {
+    const headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': this.retrieveToken().access_token
+    });
+    const options = new RequestOptions({withCredentials: true, headers: headers});
+    const body = JSON.stringify(user);
+
+    return this.http.post(`${environment.baseApiUrl}/details`, body, {headers: headers})
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  register(user: RegisterModel): Observable<Response> {
     const body = JSON.stringify(user);
     const headers = new Headers({'Content-Type': 'application/json'});
 
@@ -27,35 +53,35 @@ export class AuthService {
       .catch(this.handleError);
   }
 
-  logout(): void{
+  logout(): void {
     this.removeToken();
     this.http.get(`${environment.baseApiUrl}/auth/logout`).subscribe();
   }
 
-  isLoggedIn(): boolean{
+  isLoggedIn(): boolean {
     const token: AuthTokenModel = this.retrieveToken();
     return token !== null;
   }
 
-  private getToken(user: LoginModel): Observable<Response>{
+  private getToken(user: LoginModel): Observable<Response> {
     const token: AuthTokenModel = {access_token: 'Basic ' + btoa(user.login + ":" + user.password)};
     const headers = new Headers({'Content-Type': 'application/json', 'Authorization': token.access_token});
     const options = new RequestOptions({withCredentials: true, headers: headers});
 
     return this.http.get(`${environment.baseApiUrl}/auth`, options)
-      .do(() =>{
-        this.storeToken(token)
+      .do(() => {
+        this.storeToken(token);
       })
       .catch(this.handleError);
   }
 
-  retrieveToken(): AuthTokenModel{
+  retrieveToken(): AuthTokenModel {
     const tokenString = localStorage.getItem(this.LOCAL_STORAGE_AUTH_TOKEN_KEY);
     const tokenModel: AuthTokenModel = tokenString == null ? null : JSON.parse(tokenString);
     return tokenModel;
   }
 
-  private storeToken(token: AuthTokenModel): void{
+  private storeToken(token: AuthTokenModel): void {
     localStorage.setItem(this.LOCAL_STORAGE_AUTH_TOKEN_KEY, JSON.stringify(token));
   }
 
@@ -63,11 +89,18 @@ export class AuthService {
     localStorage.removeItem(this.LOCAL_STORAGE_AUTH_TOKEN_KEY);
   }
 
+  private extractData(response: Response): any {
+    JSON.stringify(response);
+    let body = response.json();
+    return body || {};
+  }
+
   private handleError(error: Response | any) {
     let errorsDescription = {
       401: 'User unauthorized',
       409: 'User with this login already exists'
     };
+    console.log(JSON.stringify(error, null, 2));
     return Observable.throw(errorsDescription[error.status] || error.toString());
   }
 }
