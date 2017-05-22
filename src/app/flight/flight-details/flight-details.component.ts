@@ -1,13 +1,15 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {AirportService} from "../../airport/airport.service";
+import {FlightService} from "../flight.service";
+import {GoogleMapsModel} from "../../models/google-maps-model";
 
-
-interface marker {
-  lat: number;
-  lng: number;
-  label?: string;
-  draggable?: boolean;
-}
+//
+// interface marker {
+//   lat: number;
+//   lng: number;
+//   label?: string;
+//   draggable?: boolean;
+// }
 
 @Component({
   selector: 'app-flight-details',
@@ -15,70 +17,52 @@ interface marker {
   styleUrls: ['./flight-details.component.css']
 })
 export class FlightDetailsComponent implements OnInit, OnChanges {
-  // google maps zoom level
-  zoom: number = 5;
-
-  // initial center position for the map
-  lat: number = 51.469603;
-  lng: any = 6.00;
-
-  markers: marker[] = [];
-
+  private googleMapsModel: GoogleMapsModel = {lat: 0, lng: 0, zoom: 3, markers: []};
   @Input() flight;
 
-  constructor(private airportService: AirportService) {
+  constructor(private flightService: FlightService) {
   }
 
   ngOnInit() {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (!this.flight) {
-      return;
-    }
-    let destinationLongitude;
-    let originLongitude;
-    //get and display on map dst and origin airports
-    this.airportService.getAirports(this.flight.destination.name).subscribe(data => {
-      this.markers = [];
-      let airport: any = data[0];
-      destinationLongitude = airport.latitude;
-
-      this.markers.push({
-        label: airport.name,
-        lat: airport.latitude,
-        lng: airport.longitude
-      });
-
-      this.airportService.getAirports(this.flight.origin.name).subscribe(data => {
-        let airport: any = data[0];
-        originLongitude = airport.latitude;
-        let mean: any = (destinationLongitude + originLongitude)/2;
-
-        this.markers.push({
-          label: airport.name,
-          lat: airport.latitude,
-          lng: airport.longitude
-        });
-      })
-    })
+    this.flightService.getFlightById(this.flight.id).subscribe(this.handleFlightData, this.handleError);
   }
 
+  private handleFlightData = data => {
+    this.googleMapsModel.markers = [];
+    this.googleMapsModel.markers.push({
+      label: data.destination.name,
+      lat: data.destination.latitude,
+      lng: data.destination.longitude
+    });
+    this.googleMapsModel.markers.push({
+      label: data.origin.name,
+      lat: data.origin.latitude,
+      lng: data.origin.longitude
+    });
+    this.googleMapsModel.lat = (data.destination.latitude + data.origin.latitude) / 2;
+    this.googleMapsModel.lng = (data.destination.longitude + data.origin.longitude) / 2;
+  }
+
+  private handleError = err => {
+    console.log(JSON.stringify(err, null, 2));
+  }
+
+
   clickedMarker(label: string, index: number) {
-    console.log(`clicked the marker: ${label || index}`)
+    console.log(`clicked the marker: ${label || index}`);
   }
 
   mapClicked($event) {
-    this.markers.push({
-      lat: $event.coords.lat,
-      lng: $event.coords.lng
-    });
+    // this.googleMapsModel.markers.push({
+    //   lat: $event.coords.lat,
+    //   lng: $event.coords.lng
+    // });
   }
 
-  markerDragEnd(m: marker, $event: MouseEvent) {
+  markerDragEnd(m, $event: MouseEvent) {
     console.log('dragEnd', m, $event);
   }
-
-
-
 }

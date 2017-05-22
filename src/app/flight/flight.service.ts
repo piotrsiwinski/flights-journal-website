@@ -16,6 +16,18 @@ export class FlightService {
   constructor(private http: Http, private authService: AuthService) {
   }
 
+  public getFlightById(id) {
+    const headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': this.authService.retrieveToken().access_token
+    });
+    const options = new RequestOptions({withCredentials: true, headers: headers});
+
+    return this.http.get(`${environment.baseApiUrl}/flight/${id}`, options)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
   getFlightByNumberAndDate(flight: FlightModel): Observable<any> {
     let date = flight.date.split('-');
     let year = date[0];
