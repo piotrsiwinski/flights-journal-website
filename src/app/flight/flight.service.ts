@@ -76,6 +76,6 @@ export class FlightService {
       errorMessage = error.message ? error.message : error.toString();
     }
     console.log(error);
-    return Observable.throw(errorMessage)
+    return Observable.throw(errorMessage);
   }
 }

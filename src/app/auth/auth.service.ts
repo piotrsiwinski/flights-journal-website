@@ -18,7 +18,7 @@ export class AuthService {
   getUserDetails() {
     const headers = new Headers({
       'Content-Type': 'application/json',
-      'Authorization': 'Basic dGVzdDEyMzEyM0B3cC5wbDpQQHNzdzByZA=='
+      'Authorization': this.retrieveToken().access_token
     });
     const options = new RequestOptions({withCredentials: true, headers: headers});
 
