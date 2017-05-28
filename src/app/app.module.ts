@@ -4,13 +4,10 @@ import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {AppComponent} from './app.component';
-import {HeaderComponent} from './shared/header/header.component';
-import {BannerComponent} from './shared/banner/banner.component';
-import {FooterComponent} from './shared/footer/footer.component';
-import {RouterModule} from "@angular/router";
-import {appRoutes} from "./app.routing";
+import {RouterModule} from '@angular/router';
+import {appRoutes} from './app.routing';
 import {UserComponent} from './user/user.component';
-import {HomeComponent} from "./home/home.component";
+import {HomeComponent} from './home/home.component';
 import {LoginComponent} from './user/login/login.component';
 import {RegisterComponent} from './user/register/register.component';
 import {FlightComponent} from './flight/flight.component';
@@ -21,7 +18,7 @@ import {AboutComponent} from './home/about/about.component';
 import {AirportComponent} from './airport/airport.component';
 import {AirportsListComponent} from './airport/airports-list/airports-list.component';
 import {AirportItemComponent} from './airport/airport-item/airport-item.component';
-import {AirportService} from "./airport/airport.service";
+import {AirportService} from './airport/airport.service';
 import {AirportSearchComponent} from './airport/airport-search/airport-search.component';
 import {ErrorComponent} from './error/error.component';
 import {AuthenticationGuard} from "./auth/auth-guard";
@@ -31,12 +28,13 @@ import {AuthService} from "./auth/auth.service";
 import { UserFlightsComponent } from './flight/user-flights/user-flights.component';
 import { FlightDetailsComponent } from './flight/flight-details/flight-details.component';
 import { AccountEditComponent } from './user/account/account-edit/account-edit.component';
+import {HeaderComponent} from './header/header.component';
+import {FooterComponent} from './footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    BannerComponent,
     HomeComponent,
     FooterComponent,
     UserComponent,
