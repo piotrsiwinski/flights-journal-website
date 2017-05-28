@@ -1,87 +1,53 @@
-<div class="inner-page-wrapper">
-  <div class="container">
-    <div class="row">
+<br><br><br>
+<div [hidden]="userCreated">
 
-      <!-- Inner page Wrapper Start -->
-      <div class="inner-page-wrapper form-wrapper">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="row">
-                <div class="col-sm-6 space">
-                  <div [hidden]="userCreated">
+  <div>
+    <h3>Create new account</h3>
+    <hr>
 
-                    <div class="form">
-                      <h3>Create new account</h3>
-                      <hr>
-
-                      <div *ngIf="errorMessage">
-                        <span class="text-danger"> <strong>Can't create user</strong>
-                          <p>{{errorMessage}}</p>
-                        </span>
-
-                      </div>
-
-                      <form [formGroup]="registerForm" method="post" (ngSubmit)="onSubmit()" class="form-signin">
-
-                        <div class="form-group">
-                          <input formControlName="email" id="email" class="txt" name="email" placeholder="Email"
-                                 type="text">
-                          <span *ngIf="formErrors.email" class="text-danger">
-                            {{formErrors.email}}
-                          </span>
-                        </div>
-
-                        <div class="form-group">
-                          <input formControlName="login" id="login" class="txt" name="login" placeholder="Login"
-                                 type="text">
-                          <span *ngIf="formErrors.login" class="text-danger">
-                            {{formErrors.login}}
-                          </span>
-                        </div>
-
-                        <div class="form-group">
-                          <input formControlName="password" id="password" class="txt" name="password"
-                                 placeholder="Password" type="password">
-                          <span *ngIf="formErrors.password" class="text-danger">
-                            {{formErrors.password}}
-                          </span>
-                        </div>
-
-                        <div class="form-group">
-                          <input formControlName="confirmPassword" id="confirmPassword" class="txt"
-                                 name="confirmPassword" placeholder="Confirm password" type="password">
-                          <span *ngIf="formErrors.confirmPassword" class="text-danger">
-                            {{formErrors.confirmPassword}}
-                          </span>
-                        </div>
-
-                        <div class="form-group">
-                          <button [disabled]="!registerForm.valid" name="submit" class="btn txt2" type="submit">
-                            Register
-                          </button>
-                        </div>
-
-                      </form>
-                    </div>
-                  </div>
-
-                  <div [hidden]="!userCreated">
-                    <div class="title">
-                      <h2>Congratulations!</h2>
-                      <span class="title-border"></span>
-                      <p>Your account has been created</p>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Inner page Wrapper End -->
+    <div *ngIf="errorMessage">
+      <span class="text-danger"> <strong>Can't create user</strong>
+        <p>{{errorMessage}}</p>
+      </span>
     </div>
+
+    <form [formGroup]="registerForm" method="post" (ngSubmit)="onSubmit()" class="form-horizontal">
+
+      <div class="form-group">
+        <input formControlName="email" id="email" class="form-control" name="email" placeholder="Email" type="text">
+        <span *ngIf="formErrors.email" class="text-danger">{{formErrors.email}}</span>
+      </div>
+
+      <div class="form-group">
+        <input formControlName="login" id="login" class="form-control" name="login" placeholder="Login" type="text">
+        <span *ngIf="formErrors.login" class="text-danger">{{formErrors.login}}</span>
+      </div>
+
+      <div class="form-group">
+        <input formControlName="password" id="password" class="form-control" name="password" placeholder="Password" type="password">
+        <span *ngIf="formErrors.password" class="text-danger">{{formErrors.password}}</span>
+      </div>
+
+      <div class="form-group">
+        <input formControlName="confirmPassword" id="confirmPassword" class="form-control" name="confirmPassword" placeholder="Confirm password" type="password">
+        <span *ngIf="formErrors.confirmPassword" class="text-danger">{{formErrors.confirmPassword}}</span>
+      </div>
+
+      <div class="form-group">
+        <button [disabled]="!registerForm.valid" name="submit" class="btn btn-primary" type="submit">
+          Register
+        </button>
+      </div>
+
+    </form>
   </div>
 </div>
+
+<div [hidden]="!userCreated">
+  <div class="title">
+    <h2>Congratulations!</h2>
+    <span class="title-border"></span>
+    <p>Your account has been created</p>
+  </div>
+</div>
+

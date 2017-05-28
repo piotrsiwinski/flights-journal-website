@@ -6,7 +6,6 @@ import {HttpModule} from '@angular/http';
 import {AppComponent} from './app.component';
 import {RouterModule} from '@angular/router';
 import {appRoutes} from './app.routing';
-import {UserComponent} from './user/user.component';
 import {HomeComponent} from './home/home.component';
 import {LoginComponent} from './user/login/login.component';
 import {RegisterComponent} from './user/register/register.component';
@@ -21,13 +20,13 @@ import {AirportItemComponent} from './airport/airport-item/airport-item.componen
 import {AirportService} from './airport/airport.service';
 import {AirportSearchComponent} from './airport/airport-search/airport-search.component';
 import {ErrorComponent} from './error/error.component';
-import {AuthenticationGuard} from "./auth/auth-guard";
+import {AuthenticationGuard} from './auth/auth-guard';
 import {AddFlightComponent} from './flight/add-flight/add-flight.component';
-import {FlightService} from "./flight/flight.service";
-import {AuthService} from "./auth/auth.service";
-import { UserFlightsComponent } from './flight/user-flights/user-flights.component';
-import { FlightDetailsComponent } from './flight/flight-details/flight-details.component';
-import { AccountEditComponent } from './user/account/account-edit/account-edit.component';
+import {FlightService} from './flight/flight.service';
+import {AuthService} from './auth/auth.service';
+import {UserFlightsComponent} from './flight/user-flights/user-flights.component';
+import {FlightDetailsComponent} from './flight/flight-details/flight-details.component';
+import {AccountEditComponent} from './user/account/account-edit/account-edit.component';
 import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
 
@@ -37,7 +36,6 @@ import {FooterComponent} from './footer/footer.component';
     HeaderComponent,
     HomeComponent,
     FooterComponent,
-    UserComponent,
     LoginComponent,
     RegisterComponent,
     FlightComponent,
