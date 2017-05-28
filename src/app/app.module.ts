@@ -9,7 +9,6 @@ import {appRoutes} from './app.routing';
 import {HomeComponent} from './home/home.component';
 import {LoginComponent} from './user/login/login.component';
 import {RegisterComponent} from './user/register/register.component';
-import {FlightComponent} from './flight/flight.component';
 import {FlightsListComponent} from './flight/flights-list/flights-list.component';
 import {AccountComponent} from './user/account/account.component';
 import {ContactComponent} from './home/contact/contact.component';
@@ -38,7 +37,6 @@ import {FooterComponent} from './footer/footer.component';
     FooterComponent,
     LoginComponent,
     RegisterComponent,
-    FlightComponent,
     FlightsListComponent,
     AccountComponent,
     ContactComponent,
