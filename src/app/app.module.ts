@@ -17,7 +17,6 @@ import {AirportComponent} from './airport/airport.component';
 import {AirportsListComponent} from './airport/airports-list/airports-list.component';
 import {AirportItemComponent} from './airport/airport-item/airport-item.component';
 import {AirportService} from './airport/airport.service';
-import {AirportSearchComponent} from './airport/airport-search/airport-search.component';
 import {ErrorComponent} from './error/error.component';
 import {AuthenticationGuard} from './auth/auth-guard';
 import {AddFlightComponent} from './flight/add-flight/add-flight.component';
@@ -44,7 +43,6 @@ import {FooterComponent} from './footer/footer.component';
     AirportComponent,
     AirportsListComponent,
     AirportItemComponent,
-    AirportSearchComponent,
     ErrorComponent,
     AddFlightComponent,
     UserFlightsComponent,
