@@ -1,10 +1,9 @@
 import {environment} from './../../environments/environment.prod';
 
-import {Injectable, EventEmitter} from '@angular/core';
-import {Http, Response} from "@angular/http";
-import {AirportViewModel} from "../models/airport-view-model";
-import {map} from "rxjs/operator/map";
-import {Observable} from "rxjs";
+import {EventEmitter, Injectable} from '@angular/core';
+import {Http, Response} from '@angular/http';
+import {AirportViewModel} from '../models/airport-view-model';
+import {Observable} from 'rxjs';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
@@ -19,23 +18,24 @@ export class AirportService {
 
   }
 
-  getAllAirports() : Observable<AirportViewModel[]>{
-    return this.http.get(this.URL + '/airport/all')
-                    .map(this.extractData)
-                    .catch(this.handleError);
+  getAirportsWithLimit(name: string, page: number): Observable<any> {
+    return this.http.get(this.URL + `/airport/limit/${name}?page=${page}&size=10`)
+      .map(this.extractData)
+      .catch(this.handleError);
   }
 
-  getAirports(name: string) : Observable<any>{
+  getAirports(name: string): Observable<any> {
     return this.http.get(this.URL + `/airport/${name}/details`)
-                    .map(this.extractData)
-                    .catch(this.handleError);
+      .map(this.extractData)
+      .catch(this.handleError);
   }
 
   private extractData(res: Response) {
-    let body = res.json();
-    return body || { };
+    const body = res.json();
+    return body || {};
   }
-  private handleError (error: Response | any) {
+
+  private handleError(error: Response | any) {
     // In a real world app, you might use a remote logging infrastructure
     let errMsg: string;
     if (error instanceof Response) {
