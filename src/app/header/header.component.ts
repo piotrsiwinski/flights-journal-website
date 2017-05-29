@@ -1,6 +1,7 @@
-import {Component, OnInit, OnChanges, SimpleChanges, DoCheck} from '@angular/core';
-import {Router} from "@angular/router";
-import {AuthService} from "../../auth/auth.service";
+import {Component, DoCheck, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {AuthService} from '../auth/auth.service';
+
 
 @Component({
   selector: 'app-header',
@@ -8,7 +9,8 @@ import {AuthService} from "../../auth/auth.service";
   styleUrls: ['header.component.css']
 })
 export class HeaderComponent implements OnInit, DoCheck {
-  isLoggedIn: boolean = false;
+  isLoggedIn = false;
+
   constructor(private authService: AuthService, private router: Router) {
   }
 

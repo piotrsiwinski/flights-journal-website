@@ -1,26 +1,22 @@
-<div class="callouts-wrapper">
-  <div class="container">
-    <div class="title">
-      <h2><span>Account details</span></h2>
-      <span class="title-border"></span>
-      <dl *ngIf="user" class="dl-horizontal">
-        <dt>First Name:</dt>
-        <dd>
-          {{user.firstName}}
-        </dd>
+<div>
+  <h2><span>Account details</span></h2>
+  <span class="title-border"></span>
+  <dl *ngIf="user" class="dl-horizontal">
+    <dt>First Name:</dt>
+    <dd>
+      {{user.firstName}}
+    </dd>
 
-        <dt>First Name:</dt>
-        <dd>
-          {{user.lastName}}
-        </dd>
+    <dt>First Name:</dt>
+    <dd>
+      {{user.lastName}}
+    </dd>
 
-        <dt>Age:</dt>
-        <dd>
-          {{user.age}}
-        </dd>
-      </dl>
-
-    </div>
-    <p><a routerLink="/account/edit">Edit</a> </p>
-  </div>
+    <dt>Age:</dt>
+    <dd>
+      {{user.age}}
+    </dd>
+  </dl>
+  <p><a routerLink="/account/edit">Edit</a></p>
 </div>
+

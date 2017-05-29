@@ -1,114 +1,76 @@
-<div class="inner-page-wrapper">
-  <div class="container">
-    <div class="row">
+<h3>Add flight</h3>
+<hr>
 
-      <!-- Inner page Wrapper Start -->
-      <div class="inner-page-wrapper form-wrapper">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="row">
-                <div class="col-sm-6 space">
-                  <div class="form">
-                    <h3>Add flight</h3>
-                    <hr>
+<form [formGroup]="form" method="get" class="form-horizontal">
 
-                    <form [formGroup]="form" method="get" class="form-signin">
+  <div class="form-group">
+    <input formControlName="number" id="number" class="form-control" name="origin" placeholder="Flight number"
+           type="text">
+    <span *ngIf="formErrors.number" class="text-danger">{{formErrors.number}}</span>
+  </div>
 
-                      <div class="form-group">
-                        <input formControlName="number" id="number" class="txt" name="origin"
-                               placeholder="Flight number"
-                               type="text">
-                        <span *ngIf="formErrors.number" class="text-danger">
-                            {{formErrors.number}}
-                          </span>
-                      </div>
+  <div class="form-group">
+    <input formControlName="origin" id="origin" class="form-control" name="origin" placeholder="Origin" type="text">
+    <span *ngIf="formErrors.origin" class="text-danger"> {{formErrors.origin}} </span>
+  </div>
 
+  <div class="form-group">
+    <input formControlName="destination" id="destination" class="form-control" name="destination"
+           placeholder="Destination" type="text">
+    <span *ngIf="formErrors.destination" class="text-danger"> {{formErrors.destination}} </span>
+  </div>
 
-                      <div class="form-group">
-                        <input formControlName="origin" id="origin" class="txt" name="origin" placeholder="Origin"
-                               type="text">
-                        <span *ngIf="formErrors.origin" class="text-danger">
-                            {{formErrors.origin}}
-                          </span>
-                      </div>
-
-                      <div class="form-group">
-                        <input formControlName="destination" id="destination" class="txt" name="destination"
-                               placeholder="Destination" type="text">
-                        <span *ngIf="formErrors.destination" class="text-danger">
-                            {{formErrors.destination}}
-                          </span>
-                      </div>
-
-                      <div class="form-group">
-                        <input formControlName="date" id="date" class="txt" name="date" placeholder="date"
-                               type="date">
-                        <span *ngIf="formErrors.date" class="text-danger">
-                            {{formErrors.date}}
-                          </span>
-                      </div>
+  <div class="form-group">
+    <input formControlName="date" id="date" class="form-control" name="date" placeholder="date" type="date">
+    <span *ngIf="formErrors.date" class="text-danger"> {{formErrors.date}}</span>
+  </div>
 
 
-                      <div class="form-group">
-                        <button [disabled]="!form.valid" name="submit" class="btn txt2" type="button"
-                                (click)="searchFlightsClick()">
-                          Search flights
-                        </button>
-                      </div>
+  <div class="form-group">
+    <button [disabled]="!form.valid" name="submit" class="btn btn-primary" type="button" (click)="searchFlightsClick()">
+      Search flights
+    </button>
+  </div>
 
-                    </form>
-                  </div>
+</form>
 
+<div *ngIf="flights && flights.length==0 || searchErrorMessage">
+  <div class="alert alert-danger">
+    {{searchErrorMessage}}
+  </div>
+</div>
 
-                  <div *ngIf="flights && flights.length==0 || searchErrorMessage">
-                    <div class="alert alert-danger">
-                      {{searchErrorMessage}}
-                    </div>
-                  </div>
-
-                  <div *ngIf="flights && flights.length>0">
-                    <table class="table table-bordered table-stripped">
-                      <thead>
-                      <tr>
-                        <th>Flight number</th>
-                        <th>Origin</th>
-                        <th>Destination</th>
-                        <th>Full date</th>
-                        <th>Select</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                      <tr *ngFor="let flight of flights">
-                        <td>{{flight.flightNumber}}</td>
-                        <td>{{flight.destination.name}}</td>
-                        <td>{{flight.origin.name}}</td>
-                        <td>
-                          {{flight.date.toDateString()}} {{flight.date.toLocaleTimeString()}}
-                        </td>
-                        <td>
-                          <button class="txt2 btn" (click)="onFlightClick(flight)">Select</button>
-                        </td>
-                      </tr>
-                      </tbody>
-                    </table>
-                    <div *ngIf="!addSuccess && addErrorMessage">
-                      <div class="alert alert-danger">
-                        Can't add flight. {{addErrorMessage}}
-                      </div>
-                    </div>
-
-                    <button class="btn txt2" (click)="onClearClick()">Clear</button>
-
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Inner page Wrapper End -->
+<div *ngIf="flights && flights.length>0">
+  <table class="table table-bordered table-stripped">
+    <thead>
+    <tr>
+      <th>Flight number</th>
+      <th>Origin</th>
+      <th>Destination</th>
+      <th>Full date</th>
+      <th>Select</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let flight of flights">
+      <td>{{flight.flightNumber}}</td>
+      <td>{{flight.destination.name}}</td>
+      <td>{{flight.origin.name}}</td>
+      <td>
+        {{flight.date.toDateString()}} {{flight.date.toLocaleTimeString()}}
+      </td>
+      <td>
+        <button class="txt2 btn" (click)="onFlightClick(flight)">Select</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div *ngIf="!addSuccess && addErrorMessage">
+    <div class="alert alert-danger">
+      Can't add flight. {{addErrorMessage}}
     </div>
   </div>
+
+  <button class="btn btn-default" (click)="onClearClick()">Clear</button>
+
 </div>

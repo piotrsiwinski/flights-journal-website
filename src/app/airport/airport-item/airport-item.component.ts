@@ -1,8 +1,8 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
-import {AirportService} from "../airport.service";
-import {AirportViewModel} from "../../models/airport-view-model";
-import {ActivatedRoute, Router} from "@angular/router";
-import {Subscription} from "rxjs/Rx"
+import {AirportService} from '../airport.service';
+import {AirportViewModel} from '../../models/airport-view-model';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Subscription} from 'rxjs/Rx';
 
 @Component({
   selector: 'app-airport-item',
@@ -33,7 +33,7 @@ export class AirportItemComponent implements OnInit, OnDestroy {
   }
 
   onClick(){
-    this.router.navigate(['/airport'])
+    this.router.navigate(['/airport']);
   }
 
 
