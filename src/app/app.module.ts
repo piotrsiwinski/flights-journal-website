@@ -27,6 +27,7 @@ import {FlightDetailsComponent} from './flight/flight-details/flight-details.com
 import {AccountEditComponent} from './user/account/account-edit/account-edit.component';
 import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
+import {environment} from './../environments/environment.prod';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,7 @@ import {FooterComponent} from './footer/footer.component';
     HttpModule,
     RouterModule.forRoot(appRoutes),
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCnBZXxvMUxDvps9dbEV1TWEg_SQPPZ_SQ'
+      apiKey: environment.apiKey
     })
   ],
   providers: [AuthService, AirportService, AuthenticationGuard, FlightService],
