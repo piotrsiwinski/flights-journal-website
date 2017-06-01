@@ -22,7 +22,6 @@
     </thead>
     <tbody>
     <tr *ngFor="let airport of airports">
-      <td><a (click)="onAirportItemClick(airport)">{{airport.name}}</a></td>
       <td><a [routerLink]="['/airport', airport.name]">{{airport.name}}</a></td>
     </tr>
     </tbody>

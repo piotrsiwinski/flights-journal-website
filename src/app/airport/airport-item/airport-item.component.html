@@ -1,3 +1,4 @@
+<br><br><br>
 <div class="callouts-wrapper">
   <div class="container">
     <div *ngIf="selectedAirport">
@@ -9,16 +10,45 @@
           <dd>{{selectedAirport.name}}</dd>
           <dt>iataName</dt>
           <dd>{{selectedAirport.iata}}</dd>
-          <dt>id</dt>
-          <dd>{{selectedAirport.id}}</dd>
+          <dt>latitude</dt>
+          <dd>{{selectedAirport.latitude}}</dd>
+          <dt>longitude</dt>
+          <dd>{{selectedAirport.longitude}}</dd>
+          <dt>City</dt>
+          <dd>{{selectedAirport.city.name}}</dd>
+          <dt>Country</dt>
+          <dd>{{selectedAirport.city.country.name}}</dd>
         </dl>
 
       </div>
-      <button class="btn txt2" (click)="onClick()">Return</button>
-      <!--<button class="btn txt2" (click)="onHideButtonClick()">Hide</button>-->
+
+      <!--<div *ngIf="showMap">-->
+        <!--<p>Google map</p>-->
+        <!--<sebm-google-map-->
+          <!--[latitude]="googleMapsModel.lat"-->
+          <!--[longitude]="googleMapsModel.lng"-->
+          <!--[zoom]="googleMapsModel.zoom"-->
+          <!--[disableDefaultUI]="false"-->
+          <!--[zoomControl]="false"-->
+          <!--(mapClick)="mapClicked($event)">-->
+
+          <!--<sebm-google-map-marker-->
+            <!--*ngFor="let m of googleMapsModel.markers; let i = index"-->
+            <!--(markerClick)="clickedMarker(m.label, i)"-->
+            <!--[latitude]="m.lat"-->
+            <!--[longitude]="m.lng"-->
+            <!--[label]="m.label"-->
+            <!--[markerDraggable]="m.draggable"-->
+            <!--(dragEnd)="markerDragEnd(m, $event)">-->
+          <!--</sebm-google-map-marker>-->
+        <!--</sebm-google-map>-->
+
+      <!--</div>-->
+      <!--<button class="btn btn-primary" (click)="onShowClick()">Show on map</button>-->
+      <button class="btn btn-default" (click)="onClick()">Return</button>
     </div>
     <!--<div *ngIf="!selectedAirport">-->
-      <!--<span class="text-danger">Coudnt find airport</span>-->
+    <!--<span class="text-danger">Coudnt find airport</span>-->
     <!--</div>-->
   </div>
 </div>
