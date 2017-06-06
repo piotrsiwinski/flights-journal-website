@@ -28,6 +28,7 @@ import {AccountEditComponent} from './user/account/account-edit/account-edit.com
 import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
 import {environment} from './../environments/environment.prod';
+import {AdsenseModule} from "ng2-adsense";
 
 @NgModule({
   declarations: [
@@ -58,7 +59,11 @@ import {environment} from './../environments/environment.prod';
     RouterModule.forRoot(appRoutes),
     AgmCoreModule.forRoot({
       apiKey: environment.apiKey
-    })
+    }),
+    AdsenseModule.forRoot({
+      adClient: 'ca-pub-7640562161899788',
+      adSlot: 7259870550
+    }),
   ],
   providers: [AuthService, AirportService, AuthenticationGuard, FlightService],
   bootstrap: [AppComponent]
